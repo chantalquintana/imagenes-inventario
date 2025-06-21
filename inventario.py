@@ -8,8 +8,26 @@ import string
 import shutil
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
-
 import gspread
+import subprocess
+
+def git_push_changes(mensaje_commit="Actualización inventario"):
+    try:
+        # Agrega todos los archivos modificados, incluidos las imágenes
+        subprocess.run(["git", "add", "."], check=True)
+
+        # Hace commit con mensaje
+        subprocess.run(["git", "commit", "-m", mensaje_commit], check=True)
+
+        # Hace push a la rama principal (main)
+        subprocess.run(["git", "push", "origin", "main"], check=True)
+
+        print("Cambios subidos a GitHub correctamente.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error al ejecutar git: {e}")
+
+
+
 
 CREDENCIALES_JSON = 'inventarioinfopar-d0cf52f91f49.json'
 SPREADSHEET_ID = '1Cgo4C--ByZikIPyXvZJtnBsCjOM4W9fju_N3O9T-3V0'
@@ -27,7 +45,6 @@ class InventarioSheets:
         return self.hoja.get_all_records()
 
 
-
 FILE_PATH = "inventario.xlsx"
 IMG_FOLDER = "imagenes"
 
@@ -40,13 +57,17 @@ def generar_codigo_unico(df):
         codigo = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
         if codigo not in df["Código"].values:
             return codigo
-
+        
 def guardar_df(df):
     df.to_excel(FILE_PATH, index=False)
     try:
         subir_df_a_sheets(df)
     except Exception as e:
         print(f"Error al subir datos a Google Sheets: {e}")
+
+    # Aquí llamamos a la función para subir cambios a GitHub automáticamente
+    git_push_changes("Actualización automática del inventario y las imágenes")
+
 
 
 def crear_imagen_generica(size=(230,230)):
