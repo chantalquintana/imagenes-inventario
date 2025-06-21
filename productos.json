@@ -32,7 +32,7 @@
     {
         "codigo": "7MD0M8",
         "nombre": "Rodillo de presion Hp",
-        "descripcion": "M107 M108 M2020",
+        "descripcion": "M107 M108 M477 M2020",
         "precio_compra": 45000,
         "precio_venta": 180000,
         "stock": 5,

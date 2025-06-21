@@ -25,7 +25,7 @@
         header span {
             display: flex;
             align-items: center;
-            line-height: 70px; /* igual a la altura del logo para alinear verticalmente */
+            line-height: 70px;
         }
         header img {
             height: 70px;
@@ -80,7 +80,6 @@
             padding: 20px;
         }
 
-        /* Estilos para redes sociales con efecto hover */
         .redes {
             font-size: 1.3rem;
             display: flex;
@@ -137,39 +136,19 @@
     </footer>
 
     <script>
-    // URL CSV publicado de Google Sheets (pon tu URL aquí)
-    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSp1aGupBaFx5GjV-9IsRrv8iDcQ9DzAXLvJyzSOj4p8r-gyoHk41CwDkHKxIBJWPxSeu-uhCcdTysw/pub?gid=1917242568&single=true&output=csv";
+    // URL al JSON en tu repositorio de GitHub
+    const jsonUrl = "https://raw.githubusercontent.com/chantalquintana/imagenes-inventario/main/productos.json";
 
-    // Función para convertir CSV a array de objetos
-    function csvToArray(csv) {
-        const lines = csv.trim().split('\n');
-        const headers = lines.shift().split(',');
-
-        return lines.map(line => {
-            const data = line.split(',');
-            let obj = {};
-            headers.forEach((header, i) => {
-                obj[header.trim()] = data[i] ? data[i].trim() : "";
-            });
-            return obj;
-        });
-    }
-
-    // Función para crear el HTML de un producto
     function crearProductoHTML(producto) {
-        // Ajusta las claves según cómo tengas en tu Sheets
-        const nombre = producto["Nombre"] || "Sin Nombre";
-        const descripcion = producto["Descripción"] || "";
-        const precio = producto["Precio Venta"] || "0";
-        const stock = producto["Stock"] || "0";
-        const imagen = producto["Imagen"] || "imagenes/EJEMPLO1.jpg";
-
-        // Si la imagen es URL completa o relativa, aquí asumo que es solo nombre de archivo
-        const imagenUrl = imagen.startsWith('http') ? imagen : `imagenes/${imagen}`;
+        const nombre = producto.nombre || "Sin Nombre";
+        const descripcion = producto.descripcion || "";
+        const precio = producto.precio_venta || "0";
+        const stock = producto.stock || "0";
+        const imagen = producto.imagen || "imagenes/EJEMPLO1.jpg";
 
         return `
             <div class="producto">
-                <img src="${imagenUrl}" alt="${nombre}" />
+                <img src="${imagen}" alt="${nombre}" />
                 <div class="info">
                     <div class="nombre">${nombre}</div>
                     <div class="descripcion">${descripcion}</div>
@@ -180,14 +159,12 @@
         `;
     }
 
-    // Cargar CSV, parsear y mostrar productos
-    fetch(csvUrl)
+    fetch(jsonUrl)
         .then(response => {
-            if(!response.ok) throw new Error("No se pudo cargar el CSV");
-            return response.text();
+            if (!response.ok) throw new Error("No se pudo cargar el JSON");
+            return response.json();
         })
-        .then(text => {
-            const productos = csvToArray(text);
+        .then(productos => {
             const contenedor = document.getElementById("catalogo");
             contenedor.innerHTML = productos.map(p => crearProductoHTML(p)).join('');
         })
@@ -198,6 +175,3 @@
     </script>
 </body>
 </html>
-
-
-
