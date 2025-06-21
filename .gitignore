@@ -1,1 +1,4 @@
-inventarioinfopar-d0cf52f91f49.json 
+# Ignorar credenciales sensibles
+*.json
+.env
+
