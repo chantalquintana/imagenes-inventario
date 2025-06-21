@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Catálogo de Productos - INFOPAR</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #004080;
+            color: white;
+            padding: 20px;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        header span {
+            display: flex;
+            align-items: center;
+            line-height: 70px; /* igual a la altura del logo para alinear verticalmente */
+        }
+        header img {
+            height: 70px;
+            width: auto;
+        }
+        .catalogo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+        .producto {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            text-align: center;
+            font-size: 1.25rem;
+        }
+        .producto img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+        .info {
+            padding: 15px;
+        }
+        .nombre {
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .precio {
+            color: #007700;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .descripcion {
+            font-size: 1rem;
+            color: #333;
+        }
+        .stock {
+            font-size: 1rem;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        footer {
+            background-color: #004080;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Estilos para redes sociales con efecto hover */
+        .redes {
+            font-size: 1.3rem;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .redes a {
+            color: white;
+            text-decoration: underline;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .redes a i {
+            font-size: 1.5rem;
+        }
+
+        .redes a:hover {
+            transform: scale(1.2);
+            color: #00ffcc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <span>Infopar Paraguay</span>
+        <img src="logo_infopar.jpg" alt="Logo INFOPAR" />
+    </header>
+
+    <div class="catalogo" id="catalogo">
+        <!-- Productos se cargarán aquí dinámicamente -->
+    </div>
+
+    <footer>
+        <div style="font-size: 1.3rem; margin-bottom: 10px;">
+            📱 <strong>0981912228</strong>
+        </div>
+        <div class="redes">
+            <a href="https://www.facebook.com/infopar" target="_blank" aria-label="Facebook">
+                <i class="bi bi-facebook"></i> Facebook
+            </a>
+            <a href="https://www.instagram.com/infopar" target="_blank" aria-label="Instagram">
+                <i class="bi bi-instagram"></i> Instagram
+            </a>
+            <a href="https://wa.me/595981912228" target="_blank" aria-label="WhatsApp">
+                <i class="bi bi-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </footer>
+
+    <script>
+    // URL CSV publicado de Google Sheets (pon tu URL aquí)
+    const csvUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSp1aGupBaFx5GjV-9IsRrv8iDcQ9DzAXLvJyzSOj4p8r-gyoHk41CwDkHKxIBJWPxSeu-uhCcdTysw/pub?gid=1917242568&single=true&output=csv";
+
+    // Función para convertir CSV a array de objetos
+    function csvToArray(csv) {
+        const lines = csv.trim().split('\n');
+        const headers = lines.shift().split(',');
+
+        return lines.map(line => {
+            const data = line.split(',');
+            let obj = {};
+            headers.forEach((header, i) => {
+                obj[header.trim()] = data[i] ? data[i].trim() : "";
+            });
+            return obj;
+        });
+    }
+
+    // Función para crear el HTML de un producto
+    function crearProductoHTML(producto) {
+        // Ajusta las claves según cómo tengas en tu Sheets
+        const nombre = producto["Nombre"] || "Sin Nombre";
+        const descripcion = producto["Descripción"] || "";
+        const precio = producto["Precio Venta"] || "0";
+        const stock = producto["Stock"] || "0";
+        const imagen = producto["Imagen"] || "imagenes/EJEMPLO1.jpg";
+
+        // Si la imagen es URL completa o relativa, aquí asumo que es solo nombre de archivo
+        const imagenUrl = imagen.startsWith('http') ? imagen : `imagenes/${imagen}`;
+
+        return `
+            <div class="producto">
+                <img src="${imagenUrl}" alt="${nombre}" />
+                <div class="info">
+                    <div class="nombre">${nombre}</div>
+                    <div class="descripcion">${descripcion}</div>
+                    <div class="precio">Gs. ${precio}</div>
+                    <div class="stock">Stock: ${stock} unidades</div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Cargar CSV, parsear y mostrar productos
+    fetch(csvUrl)
+        .then(response => {
+            if(!response.ok) throw new Error("No se pudo cargar el CSV");
+            return response.text();
+        })
+        .then(text => {
+            const productos = csvToArray(text);
+            const contenedor = document.getElementById("catalogo");
+            contenedor.innerHTML = productos.map(p => crearProductoHTML(p)).join('');
+        })
+        .catch(error => {
+            console.error("Error al cargar productos:", error);
+            document.getElementById("catalogo").innerHTML = "<p>No se pudieron cargar los productos.</p>";
+        });
+    </script>
+</body>
+</html>
+
+
+
