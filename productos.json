@@ -1,0 +1,42 @@
+[
+    {
+        "codigo": "22PE9H",
+        "nombre": "Caja de mantenimiento Epson",
+        "descripcion": "L3110 L3150 L4260",
+        "precio_compra": 35000,
+        "precio_venta": 100000,
+        "stock": 17,
+        "vendidos": 12,
+        "imagen": "imagenes/AAA001.jpg"
+    },
+    {
+        "codigo": "RL65VS",
+        "nombre": "Almohadilla Epson",
+        "descripcion": "F170",
+        "precio_compra": 25000,
+        "precio_venta": 100000,
+        "stock": 18,
+        "vendidos": 14,
+        "imagen": "imagenes/RL65VS.png"
+    },
+    {
+        "codigo": "5YPBKM",
+        "nombre": "Chip DMD para proyector",
+        "descripcion": "Optoma",
+        "precio_compra": 250000,
+        "precio_venta": 350000,
+        "stock": 1,
+        "vendidos": 1,
+        "imagen": "imagenes/5YPBKM.jpg"
+    },
+    {
+        "codigo": "7MD0M8",
+        "nombre": "Rodillo de presion Hp",
+        "descripcion": "M107 M108 M2020",
+        "precio_compra": 45000,
+        "precio_venta": 180000,
+        "stock": 5,
+        "vendidos": 8,
+        "imagen": "imagenes/7MD0M8.jpg"
+    }
+]
