@@ -10,6 +10,7 @@ from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 import gspread
 import subprocess
+import json
 
 def git_push_changes(mensaje_commit="Actualización inventario"):
     try:
@@ -26,6 +27,24 @@ def git_push_changes(mensaje_commit="Actualización inventario"):
     except subprocess.CalledProcessError as e:
         print(f"Error al ejecutar git: {e}")
 
+
+
+def exportar_a_json(df):
+    # Crear lista de productos en formato JSON
+    productos = []
+    for _, row in df.iterrows():
+        productos.append({
+            "codigo": row["Código"],
+            "nombre": row["Nombre"],
+            "descripcion": row["Descripción"],
+            "precio_compra": row["Precio Compra"],
+            "precio_venta": row["Precio Venta"],
+            "stock": row["Stock"],
+            "vendidos": row["Vendidos"],
+            "imagen": f"imagenes/{row['Imagen']}" if row.get("Imagen") else ""
+        })
+    with open("productos.json", "w", encoding="utf-8") as f:
+        json.dump(productos, f, ensure_ascii=False, indent=4)
 
 
 
@@ -65,8 +84,14 @@ def guardar_df(df):
     except Exception as e:
         print(f"Error al subir datos a Google Sheets: {e}")
 
-    # Aquí llamamos a la función para subir cambios a GitHub automáticamente
-    git_push_changes("Actualización automática del inventario y las imágenes")
+    try:
+        exportar_a_json(df)  # Genera y guarda productos.json
+    except Exception as e:
+        print(f"Error al exportar productos.json: {e}")
+
+    # Finalmente sube todos los cambios a GitHub
+    git_push_changes("Actualización automática del inventario, Google Sheets y productos.json")
+
 
 
 
