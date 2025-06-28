@@ -15,8 +15,8 @@
         "descripcion": "F170",
         "precio_compra": 25000,
         "precio_venta": 100000,
-        "stock": 18,
-        "vendidos": 14,
+        "stock": 20,
+        "vendidos": 15,
         "imagen": "imagenes/RL65VS.png"
     },
     {
