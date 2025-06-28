@@ -270,6 +270,9 @@ class InventarioApp:
 
         self.limpiar_campos()
 
+        self.actualizar_periodicamente()
+
+
         self.imagen_actual = None
 
     def preguntar_actualizar_desde_sheets(self):
@@ -308,6 +311,11 @@ class InventarioApp:
         print(f"Error al comparar o actualizar inventario: {e}")
         messagebox.showerror("Error", f"No se pudo cargar el inventario correctamente.\n{e}")
 
+    def actualizar_periodicamente(self):
+      self.preguntar_actualizar_desde_sheets()
+      self.root.after(30000, self.actualizar_periodicamente)  # 30 segundos
+
+    
     def bloquear_redimension_columnas(self, event):
         if self.tree.identify_region(event.x, event.y) == "separator":
             return "break"
