@@ -63,7 +63,7 @@ def generar_codigo_unico(df):
         codigo = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
         if codigo not in df["Código"].values:
             return codigo
-        
+
 def guardar_df(df):
     df.to_excel(FILE_PATH, index=False)
     try:
@@ -272,50 +272,48 @@ class InventarioApp:
 
         self.actualizar_periodicamente()
 
-
         self.imagen_actual = None
 
     def preguntar_actualizar_desde_sheets(self):
-      try:
-        # Leer datos locales si existen
-        if os.path.exists(FILE_PATH):
-            df_local = pd.read_excel(FILE_PATH)
-        else:
-            df_local = pd.DataFrame()
-
-        # Leer datos desde Sheets
-        df_sheets = pd.DataFrame(self.inventario_sheets.leer_datos())
-
-        # Normalizar tipos de datos para comparación (convertir todo a str)
-        df_local_str = df_local.astype(str).fillna("")
-        df_sheets_str = df_sheets.astype(str).fillna("")
-
-        # Comparar si son exactamente iguales
-        iguales = df_local_str.equals(df_sheets_str)
-
-        if not iguales:
-            # Actualizar local con datos de Sheets
-            self.df = df_sheets
-            guardar_df(self.df)
-            self.llenar_tabla(self.df)
-            messagebox.showinfo("Actualizado", "Inventario local actualizado desde Google Sheets.")
-        else:
-            if not df_local.empty:
-                self.df = df_local
-                self.llenar_tabla(self.df)
+        try:
+            # Leer datos locales si existen
+            if os.path.exists(FILE_PATH):
+                df_local = pd.read_excel(FILE_PATH)
             else:
-                self.df = df_sheets
-                self.llenar_tabla(self.df)
+                df_local = pd.DataFrame()
 
-      except Exception as e:
-        print(f"Error al comparar o actualizar inventario: {e}")
-        messagebox.showerror("Error", f"No se pudo cargar el inventario correctamente.\n{e}")
+            # Leer datos desde Sheets
+            df_sheets = pd.DataFrame(self.inventario_sheets.leer_datos())
+
+            # Normalizar tipos de datos para comparación (convertir todo a str)
+            df_local_str = df_local.astype(str).fillna("")
+            df_sheets_str = df_sheets.astype(str).fillna("")
+
+            # Comparar si son exactamente iguales
+            iguales = df_local_str.equals(df_sheets_str)
+
+            if not iguales:
+                # Actualizar local con datos de Sheets
+                self.df = df_sheets
+                guardar_df(self.df)
+                self.llenar_tabla(self.df)
+                messagebox.showinfo("Actualizado", "Inventario local actualizado desde Google Sheets.")
+            else:
+                if not df_local.empty:
+                    self.df = df_local
+                    self.llenar_tabla(self.df)
+                else:
+                    self.df = df_sheets
+                    self.llenar_tabla(self.df)
+
+        except Exception as e:
+            print(f"Error al comparar o actualizar inventario: {e}")
+            messagebox.showerror("Error", f"No se pudo cargar el inventario correctamente.\n{e}")
 
     def actualizar_periodicamente(self):
-      self.preguntar_actualizar_desde_sheets()
-      self.root.after(30000, self.actualizar_periodicamente)  # 30 segundos
+        self.preguntar_actualizar_desde_sheets()
+        self.root.after(30000, self.actualizar_periodicamente)  # 30 segundos
 
-    
     def bloquear_redimension_columnas(self, event):
         if self.tree.identify_region(event.x, event.y) == "separator":
             return "break"
@@ -404,13 +402,80 @@ class InventarioApp:
         self.limpiar_campos()
         messagebox.showinfo("Éxito", "Producto agregado correctamente.")
 
+    def llenar_tabla(self, df):
+        for item in self.tree.get_children():
+            self.tree.delete(item)
+        for _, row in df.iterrows():
+            self.tree.insert("", "end", values=(
+                row["Código"],
+                row["Nombre"],
+                row["Descripción"],
+                row["Precio Compra"],
+                row["Precio Venta"],
+                row["Stock"],
+                row["Vendidos"]
+            ))
+
+    def mostrar_detalle_producto(self, event):
+        seleccion = self.tree.selection()
+        if not seleccion:
+            return
+        item = self.tree.item(seleccion[0])
+        codigo = item["values"][0]
+
+        fila = self.df[self.df["Código"] == codigo]
+        if fila.empty:
+            return
+        fila = fila.iloc[0]
+
+        self.lbl_nombre_ampliado.config(text=f"Nombre: {fila['Nombre']}")
+        self.txt_descripcion_ampliada.config(state="normal")
+        self.txt_descripcion_ampliada.delete(1.0, tk.END)
+        self.txt_descripcion_ampliada.insert(tk.END, fila["Descripción"])
+        self.txt_descripcion_ampliada.config(state="disabled")
+
+        if fila["Imagen"]:
+            ruta_img = os.path.join(IMG_FOLDER, fila["Imagen"])
+            if os.path.exists(ruta_img):
+                self.mostrar_imagen(ruta_img)
+            else:
+                self.mostrar_imagen_generica()
+        else:
+            self.mostrar_imagen_generica()
+
+        # Habilitar botones de editar y eliminar
+        self.btn_editar.config(state="normal")
+        self.btn_eliminar.config(state="normal")
+        self.btn_agregar.config(state="disabled")
+
+        # Rellenar campos para editar
+        self.entries["Nombre"].delete(0, tk.END)
+        self.entries["Nombre"].insert(0, fila["Nombre"])
+        self.entries["Descripción"].delete(0, tk.END)
+        self.entries["Descripción"].insert(0, fila["Descripción"])
+        self.entries["Precio Compra"].delete(0, tk.END)
+        self.entries["Precio Compra"].insert(0, fila["Precio Compra"])
+        self.entries["Precio Venta"].delete(0, tk.END)
+        self.entries["Precio Venta"].insert(0, fila["Precio Venta"])
+        self.entries["Stock"].delete(0, tk.END)
+        self.entries["Stock"].insert(0, fila["Stock"])
+        self.entries["Vendidos"].delete(0, tk.END)
+        self.entries["Vendidos"].insert(0, fila["Vendidos"])
+
+        self.imagen_path_var.set("")
+
     def editar_producto(self):
         seleccion = self.tree.selection()
         if not seleccion:
-            messagebox.showerror("Error", "Seleccione un producto para editar.")
+            messagebox.showwarning("Aviso", "Seleccione un producto para editar.")
             return
-        indice = self.tree.index(seleccion[0])
-        codigo = self.df.loc[indice, "Código"]
+        codigo = self.tree.item(seleccion[0])["values"][0]
+
+        idx = self.df.index[self.df["Código"] == codigo]
+        if idx.empty:
+            messagebox.showerror("Error", "Producto no encontrado en el inventario.")
+            return
+        idx = idx[0]
 
         nombre = self.entries["Nombre"].get().strip()
         descripcion = self.entries["Descripción"].get().strip()
@@ -427,22 +492,26 @@ class InventarioApp:
             messagebox.showerror("Error", "El nombre es obligatorio.")
             return
 
-        # Actualizar imagen si se cambió
-        nombre_imagen = self.df.loc[indice, "Imagen"]
-        if self.imagen_path_var.get() and (not nombre_imagen or os.path.basename(self.imagen_path_var.get()) != nombre_imagen):
+        # Guardar imagen nueva si seleccionada
+        if self.imagen_path_var.get():
             ruta_origen = self.imagen_path_var.get()
             ext = os.path.splitext(ruta_origen)[1]
             nombre_imagen = f"{codigo}{ext}"
             ruta_destino = os.path.join(IMG_FOLDER, nombre_imagen)
             try:
                 shutil.copyfile(ruta_origen, ruta_destino)
+                self.df.at[idx, "Imagen"] = nombre_imagen
             except Exception as e:
                 messagebox.showerror("Error", f"No se pudo copiar la imagen.\n{e}")
                 return
 
-        self.df.loc[indice, ["Nombre", "Descripción", "Precio Compra", "Precio Venta", "Stock", "Vendidos", "Imagen"]] = [
-            nombre, descripcion, precio_compra, precio_venta, stock, vendidos, nombre_imagen
-        ]
+        self.df.at[idx, "Nombre"] = nombre
+        self.df.at[idx, "Descripción"] = descripcion
+        self.df.at[idx, "Precio Compra"] = precio_compra
+        self.df.at[idx, "Precio Venta"] = precio_venta
+        self.df.at[idx, "Stock"] = stock
+        self.df.at[idx, "Vendidos"] = vendidos
+
         guardar_df(self.df)
         self.llenar_tabla(self.df)
         self.limpiar_campos()
@@ -451,98 +520,24 @@ class InventarioApp:
     def eliminar_producto(self):
         seleccion = self.tree.selection()
         if not seleccion:
-            messagebox.showerror("Error", "Seleccione un producto para eliminar.")
+            messagebox.showwarning("Aviso", "Seleccione un producto para eliminar.")
             return
-        indice = self.tree.index(seleccion[0])
-        codigo = self.df.loc[indice, "Código"]
+        codigo = self.tree.item(seleccion[0])["values"][0]
 
         if messagebox.askyesno("Confirmar", "¿Está seguro que desea eliminar el producto?"):
-            # Eliminar imagen asociada si existe
-            nombre_imagen = self.df.loc[indice, "Imagen"]
-            if nombre_imagen:
-                ruta_imagen = os.path.join(IMG_FOLDER, nombre_imagen)
-                if os.path.exists(ruta_imagen):
-                    try:
-                        os.remove(ruta_imagen)
-                    except Exception as e:
-                        print(f"No se pudo eliminar la imagen: {e}")
-
-            self.df = self.df.drop(self.df.index[indice]).reset_index(drop=True)
+            self.df = self.df[self.df["Código"] != codigo]
             guardar_df(self.df)
             self.llenar_tabla(self.df)
             self.limpiar_campos()
             messagebox.showinfo("Éxito", "Producto eliminado correctamente.")
 
-    def llenar_tabla(self, df):
-        for i in self.tree.get_children():
-            self.tree.delete(i)
-        for _, row in df.iterrows():
-            valores = (
-                row["Código"],
-                row["Nombre"],
-                row["Descripción"],
-                f"{row['Precio Compra']:.2f}",
-                f"{row['Precio Venta']:.2f}",
-                row["Stock"],
-                row["Vendidos"]
-            )
-            self.tree.insert("", "end", values=valores)
-
     def buscar_producto(self):
         texto = self.entry_buscar.get().strip().lower()
         if not texto:
-            self.llenar_tabla(self.df)
+            messagebox.showwarning("Aviso", "Ingrese un término de búsqueda.")
             return
         df_filtrado = self.df[self.df["Nombre"].str.lower().str.contains(texto) | self.df["Descripción"].str.lower().str.contains(texto)]
         self.llenar_tabla(df_filtrado)
-
-    def mostrar_detalle_producto(self, event):
-        seleccion = self.tree.selection()
-        if not seleccion:
-            self.limpiar_campos()
-            return
-        item = self.tree.item(seleccion[0])
-        valores = item["values"]
-        codigo = valores[0]
-        fila = self.df[self.df["Código"] == codigo]
-        if fila.empty:
-            self.limpiar_campos()
-            return
-        fila = fila.iloc[0]
-
-        self.entries["Nombre"].delete(0, tk.END)
-        self.entries["Nombre"].insert(0, fila["Nombre"])
-        self.entries["Descripción"].delete(0, tk.END)
-        self.entries["Descripción"].insert(0, fila["Descripción"])
-        self.entries["Precio Compra"].delete(0, tk.END)
-        self.entries["Precio Compra"].insert(0, str(fila["Precio Compra"]))
-        self.entries["Precio Venta"].delete(0, tk.END)
-        self.entries["Precio Venta"].insert(0, str(fila["Precio Venta"]))
-        self.entries["Stock"].delete(0, tk.END)
-        self.entries["Stock"].insert(0, str(fila["Stock"]))
-        self.entries["Vendidos"].delete(0, tk.END)
-        self.entries["Vendidos"].insert(0, str(fila["Vendidos"]))
-
-        self.imagen_path_var.set("")
-        ruta_imagen = fila["Imagen"]
-        if ruta_imagen:
-            ruta_completa = os.path.join(IMG_FOLDER, ruta_imagen)
-            if os.path.exists(ruta_completa):
-                self.mostrar_imagen(ruta_completa)
-            else:
-                self.mostrar_imagen_generica()
-        else:
-            self.mostrar_imagen_generica()
-
-        self.btn_agregar.config(state="disabled")
-        self.btn_editar.config(state="normal")
-        self.btn_eliminar.config(state="normal")
-
-        self.lbl_nombre_ampliado.config(text=f"Nombre: {fila['Nombre']}")
-        self.txt_descripcion_ampliada.config(state="normal")
-        self.txt_descripcion_ampliada.delete(1.0, tk.END)
-        self.txt_descripcion_ampliada.insert(tk.END, fila["Descripción"])
-        self.txt_descripcion_ampliada.config(state="disabled")
 
 if __name__ == "__main__":
     root = tk.Tk()
