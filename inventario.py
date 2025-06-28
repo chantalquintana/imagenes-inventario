@@ -12,6 +12,7 @@ import gspread
 import subprocess
 import json
 
+
 def git_push_changes(mensaje_commit="Actualización inventario"):
     try:
         subprocess.run(["git", "add", "."], check=True)
@@ -34,8 +35,11 @@ def exportar_a_json(df):
             "vendidos": row["Vendidos"],
             "imagen": f"imagenes/{row['Imagen']}" if row.get("Imagen") else ""
         })
+    # Guardar local
     with open("productos.json", "w", encoding="utf-8") as f:
         json.dump(productos, f, ensure_ascii=False, indent=4)
+    # COPIAR AL PROYECTO FLASK para que la web siempre use la versión actualizada
+    shutil.copy("productos.json", "static/productos.json")
 
 CREDENCIALES_JSON = 'inventarioinfopar-d0cf52f91f49.json'
 SPREADSHEET_ID = '1Cgo4C--ByZikIPyXvZJtnBsCjOM4W9fju_N3O9T-3V0'

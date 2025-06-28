@@ -111,20 +111,20 @@
 <body>
     <header>
         <span>Infopar Paraguay</span>
-        <img src="{{ url_for('static', filename='imagenes/logo_infopar.jpg') }}" alt="Logo INFOPAR" />
+        <img src="{{ url_for('static', filename='logo_infopar.jpg') }}" alt="Logo INFOPAR" />
     </header>
 
     <div class="catalogo" id="catalogo">
         {% for producto in productos %}
-        <div class="producto">
-            <img src="{{ url_for('static', filename=producto.imagen or 'imagenes/EJEMPLO1.jpg') }}" alt="{{ producto.nombre or 'Sin Nombre' }}" />
-            <div class="info">
-                <div class="nombre">{{ producto.nombre or 'Sin Nombre' }}</div>
-                <div class="descripcion">{{ producto.descripcion or '' }}</div>
-                <div class="precio">Gs. {{ producto.precio_venta or '0' }}</div>
-                <div class="stock">Stock: {{ producto.stock or '0' }} unidades</div>
+            <div class="producto">
+                <img src="{{ url_for('static', filename=producto.imagen) }}" alt="{{ producto.nombre }}" />
+                <div class="info">
+                    <div class="nombre">{{ producto.nombre }}</div>
+                    <div class="descripcion">{{ producto.descripcion }}</div>
+                    <div class="precio">Gs. {{ producto.precio_venta }}</div>
+                    <div class="stock">Stock: {{ producto.stock }} unidades</div>
+                </div>
             </div>
-        </div>
         {% endfor %}
     </div>
 
