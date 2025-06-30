@@ -23,24 +23,28 @@ def git_push_changes(mensaje_commit="Actualización inventario"):
         print(f"Error al ejecutar git: {e}")
 
 def exportar_a_json(df):
-    productos = []
-    for _, row in df.iterrows():
-        productos.append({
-            "codigo": row["Código"],
-            "nombre": row["Nombre"],
-            "descripcion": row["Descripción"],
-            "precio_compra": row["Precio Compra"],
-            "precio_venta": row["Precio Venta"],
-            "stock": row["Stock"],
-            "vendidos": row["Vendidos"],
-            "imagen": f"imagenes/{row['Imagen']}" if row.get("Imagen") else ""
-        })
-    # Guardar local
-    with open("productos.json", "w", encoding="utf-8") as f:
-        json.dump(productos, f, ensure_ascii=False, indent=4)
-    # COPIAR AL PROYECTO FLASK para que la web siempre use la versión actualizada
-    shutil.copy("productos.json", "static/productos.json")
+    productos = []
+    for _, row in df.iterrows():
+        ganancia = (row["Precio Venta"] - row["Precio Compra"]) * row["Vendidos"]
+        inversion = row["Precio Compra"] * row["Stock"]
+        productos.append({
+            "codigo": row["Código"],
+            "nombre": row["Nombre"],
+            "descripcion": row["Descripción"],
+            "precio_compra": row["Precio Compra"],
+            "precio_venta": row["Precio Venta"],
+            "stock": row["Stock"],
+            "vendidos": row["Vendidos"],
+            "ganancia": ganancia,
+            "inversion": inversion,
+            "imagen": f"imagenes/{row['Imagen']}" if row.get("Imagen") else ""
+        })
 
+    with open("productos.json", "w", encoding="utf-8") as f:
+        json.dump(productos, f, ensure_ascii=False, indent=4)
+
+    shutil.copy("productos.json", "static/productos.json")
+    
 CREDENCIALES_JSON = 'inventarioinfopar-d0cf52f91f49.json'
 SPREADSHEET_ID = '1Cgo4C--ByZikIPyXvZJtnBsCjOM4W9fju_N3O9T-3V0'
 SHEET_NAME = 'Inventario_Infopar'
