@@ -41,8 +41,6 @@ def exportar_a_json(df):
     with open("productos.json", "w", encoding="utf-8") as f:
         json.dump(productos, f, ensure_ascii=False, indent=4)
 
-    shutil.copy("productos.json", "static/productos.json")
-
 
 CREDENCIALES_JSON = 'inventarioinfopar-d0cf52f91f49.json'
 SPREADSHEET_ID = '1Cgo4C--ByZikIPyXvZJtnBsCjOM4W9fju_N3O9T-3V0'
