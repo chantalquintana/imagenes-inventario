@@ -60,7 +60,7 @@ class InventarioSheets:
         return self.hoja.get_all_records()
 
 FILE_PATH = "inventario.xlsx"
-IMG_FOLDER = os.path.join("static", "imagenes")
+IMG_FOLDER = "imagenes"
 
 if not os.path.exists(IMG_FOLDER):
     os.makedirs(IMG_FOLDER)
@@ -430,17 +430,23 @@ class InventarioApp:
             return None
 
     def copiar_imagen(self, ruta_imagen):
-        if not ruta_imagen:
-            return ""
-        try:
-            nombre_archivo = os.path.basename(ruta_imagen)
-            destino = os.path.join(IMG_FOLDER, nombre_archivo)
-            if not os.path.exists(destino):
-                shutil.copy(ruta_imagen, destino)
-            return nombre_archivo
-        except Exception as e:
-            messagebox.showerror("Error", f"No se pudo copiar la imagen: {e}")
-            return ""
+    if not ruta_imagen:
+        return ""
+    try:
+        nombre_archivo = os.path.basename(ruta_imagen)
+        destino = os.path.join(IMG_FOLDER, nombre_archivo)
+
+        if not os.path.exists(IMG_FOLDER):
+            os.makedirs(IMG_FOLDER)
+
+        if not os.path.exists(destino):
+            shutil.copy(ruta_imagen, destino)
+
+        return nombre_archivo
+    except Exception as e:
+        messagebox.showerror("Error", f"No se pudo copiar la imagen: {e}")
+        return ""
+
 
     def agregar_producto(self):
         validacion = self.validar_campos()
