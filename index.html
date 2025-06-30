@@ -67,7 +67,7 @@
     font-size: 1rem;
     color: #333;
   }
-  .stock, .vendidos {
+  .stock {
     font-size: 1rem;
     color: #555;
     margin-top: 5px;
@@ -159,7 +159,6 @@ function mostrarProductos(lista) {
         <div class="descripcion">${p.descripcion}</div>
         <div class="precio">Gs. ${p.precio_venta}</div>
         <div class="stock">Stock: ${p.stock}</div>
-        <div class="vendidos">Vendidos: ${p.vendidos}</div>
       </div>
     `;
     catalogo.appendChild(div);
