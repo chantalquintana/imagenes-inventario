@@ -173,7 +173,7 @@ class InventarioApp:
         logo_frame.grid(row=0, column=2, rowspan=6, padx=(10,0), sticky="n")
         logo_frame.grid_propagate(False)
 
-        logo_path = "logo_infopar.jpg"
+        logo_path = "logo_infopar.png"
         
         try:
             logo_img = Image.open(logo_path)
