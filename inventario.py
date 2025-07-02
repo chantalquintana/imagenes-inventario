@@ -429,22 +429,22 @@ class InventarioApp:
             return None
 
     def copiar_imagen(self, ruta_imagen):
-    if not ruta_imagen:
-        return ""
-    try:
-        nombre_archivo = os.path.basename(ruta_imagen)
-        destino = os.path.join(IMG_FOLDER, nombre_archivo)
+       if not ruta_imagen:
+          return ""
+       try:
+          nombre_archivo = os.path.basename(ruta_imagen)
+          destino = os.path.join(IMG_FOLDER, nombre_archivo)
 
-        if not os.path.exists(IMG_FOLDER):
-            os.makedirs(IMG_FOLDER)
+         if not os.path.exists(IMG_FOLDER):
+           os.makedirs(IMG_FOLDER)
 
-        if not os.path.exists(destino):
+         if not os.path.exists(destino):
             shutil.copy(ruta_imagen, destino)
 
-        return nombre_archivo
-    except Exception as e:
-        messagebox.showerror("Error", f"No se pudo copiar la imagen: {e}")
-        return ""
+         return nombre_archivo
+       except Exception as e:
+         messagebox.showerror("Error", f"No se pudo copiar la imagen: {e}")
+         return ""
 
 
     def agregar_producto(self):
