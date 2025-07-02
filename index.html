@@ -44,14 +44,21 @@
     overflow: hidden;
     text-align: center;
     font-size: 1.25rem;
+    display: flex;
+    flex-direction: column;
   }
   .producto img {
     width: 100%;
     height: 230px;
     object-fit: cover;
+    flex-shrink: 0;
   }
   .info {
     padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   .nombre {
     font-weight: bold;
@@ -66,6 +73,7 @@
   .descripcion {
     font-size: 1rem;
     color: #333;
+    flex-grow: 1;
   }
   .stock {
     font-size: 1rem;
@@ -118,18 +126,18 @@
   <img src="logo_infopar.png" alt="Infopar Paraguay" style="height: 100px; object-fit: contain;" />
 </header>
 
-<input type="text" id="buscar" placeholder="Buscar producto..." oninput="filtrarProductos()" />
+<input type="text" id="buscar" placeholder="Buscar producto..." oninput="filtrarProductos()" aria-label="Buscar producto" />
 
-<div class="catalogo" id="catalogo"></div>
+<div class="catalogo" id="catalogo" role="list"></div>
 
 <footer>
   <div style="font-size: 1.3rem; margin-bottom: 10px;">
     📱 <strong>0981912228</strong>
   </div>
   <div class="redes">
-    <a href="https://www.facebook.com/infoparpy" target="_blank" aria-label="Facebook"><i class="bi bi-facebook"></i> Facebook</a>
-    <a href="https://www.instagram.com/infoparpy?igsh=MWQ0eWRvZ2I2bmlreg==" target="_blank" aria-label="Instagram"><i class="bi bi-instagram"></i> Instagram</a>
-    <a href="https://wa.me/595981912228" target="_blank" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+    <a href="https://www.facebook.com/infoparpy" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i> Facebook</a>
+    <a href="https://www.instagram.com/infoparpy?igsh=MWQ0eWRvZ2I2bmlreg==" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i> Instagram</a>
+    <a href="https://wa.me/595981912228" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i> WhatsApp</a>
   </div>
 </footer>
 
@@ -139,10 +147,11 @@ let productos = [];
 async function cargarProductos() {
   try {
     const res = await fetch('productos.json');
+    if (!res.ok) throw new Error('No se pudo cargar productos.json');
     productos = await res.json();
     mostrarProductos(productos);
   } catch (e) {
-    alert("Error cargando productos: " + e);
+    alert("Error cargando productos: " + e.message);
   }
 }
 
@@ -152,8 +161,9 @@ function mostrarProductos(lista) {
   lista.forEach(p => {
     const div = document.createElement("div");
     div.className = "producto";
+    div.setAttribute('role', 'listitem');
     div.innerHTML = `
-      <img src="${p.imagen}" alt="${p.nombre}" />
+      <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" />
       <div class="info">
         <div class="nombre">${p.nombre}</div>
         <div class="descripcion">${p.descripcion}</div>
@@ -174,7 +184,8 @@ function filtrarProductos() {
   mostrarProductos(filtrados);
 }
 
-cargarProductos();
+window.addEventListener('DOMContentLoaded', cargarProductos);
 </script>
 </body>
 </html>
+
