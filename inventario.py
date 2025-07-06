@@ -74,6 +74,12 @@ def guardar_df(df):
     df["Ganancia"] = (df["Precio Venta"] - df["Precio Compra"]) * df["Vendidos"]
     df["Inversión"] = df["Precio Compra"] * df["Stock"]
 
+    # Convertir a enteros (sin coma decimal)
+    df["Precio Compra"] = df["Precio Compra"].astype(int)
+    df["Precio Venta"] = df["Precio Venta"].astype(int)
+    df["Ganancia"] = df["Ganancia"].astype(int)
+    df["Inversión"] = df["Inversión"].astype(int)
+
     df.to_excel(FILE_PATH, index=False)
 
     try:
@@ -372,23 +378,24 @@ class InventarioApp:
 
         # Calcular Ganancia e Inversión para mostrar en tabla
         df = df.copy()
-        df["Ganancia"] = (df["Precio Venta"] - df["Precio Compra"]) * df["Vendidos"]
-        df["Inversión"] = df["Precio Compra"] * df["Stock"]
+        if "Ganancia" not in df.columns or "Inversión" not in df.columns:
+            df["Ganancia"] = (df["Precio Venta"] - df["Precio Compra"]) * df["Vendidos"]
+            df["Inversión"] = df["Precio Compra"] * df["Stock"]
 
         for _, row in df.iterrows():
             valores = (
-                row["Código"],
+                str(row["Código"]),
                 row["Nombre"],
                 row["Descripción"],
-                f"{row['Precio Compra']:.2f}",
-                f"{row['Precio Venta']:.2f}",
-                int(row["Stock"]),
-                int(row["Vendidos"]),
-                f"{row['Ganancia']:.2f}",
-                f"{row['Inversión']:.2f}"
+                f"{int(row['Precio Compra'])}",
+                f"{int(row['Precio Venta'])}",
+                f"{int(row['Stock'])}",
+                f"{int(row['Vendidos'])}",
+                f"{int(row['Ganancia'])}",
+                f"{int(row['Inversión'])}"
             )
             self.tree.insert("", "end", values=valores)
-
+            
         self.df = df  # Actualizar df interno
 
     def limpiar_campos(self):
@@ -410,8 +417,8 @@ class InventarioApp:
         try:
             nombre = self.entries["Nombre"].get().strip()
             descripcion = self.entries["Descripción"].get().strip()
-            precio_compra = float(self.entries["Precio Compra"].get())
-            precio_venta = float(self.entries["Precio Venta"].get())
+            precio_compra = int(self.entries["Precio Compra"].get())
+            precio_venta = int(self.entries["Precio Venta"].get())
             stock = int(self.entries["Stock"].get())
             vendidos = int(self.entries["Vendidos"].get())
 
@@ -470,7 +477,9 @@ class InventarioApp:
             "Imagen": imagen_nombre
         }
 
-        self.df = self.df.append(nuevo_producto, ignore_index=True)
+        nuevo_df = pd.DataFrame([nuevo_producto])  # Convierte dict a DF con 1 fila
+        self.df = pd.concat([self.df, nuevo_df], ignore_index=True)
+
         guardar_df(self.df)
         self.llenar_tabla(self.df)
         self.limpiar_campos()
