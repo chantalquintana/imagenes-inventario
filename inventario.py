@@ -11,6 +11,7 @@ from googleapiclient.discovery import build
 import gspread
 import subprocess
 import json
+from openpyxl import load_workbook
 
 
 def git_push_changes(mensaje_commit="Actualización inventario"):
@@ -81,6 +82,28 @@ def guardar_df(df):
     df["Inversión"] = df["Inversión"].astype(int)
 
     df.to_excel(FILE_PATH, index=False)
+    
+    # Guardaste el DataFrame en 'inventario.xlsx'
+    nombre_archivo = "inventario.xlsx"
+    
+    # Abrir archivo
+    wb = load_workbook(nombre_archivo)
+    ws = wb.active
+
+    # Encabezados de fórmulas (si no están ya)
+    ws["H1"] = "Ganancia"
+    ws["I1"] = "Inversión"
+
+    # Desde la fila 2 hasta el final
+    for i in range(2, ws.max_row + 1):
+        # Ganancia = (Precio Venta - Precio Compra) * Vendidos
+        ws[f"H{i}"] = f"=(E{i}-D{i})*G{i}"
+    
+        # Inversión = Precio Compra * Stock
+        ws[f"I{i}"] = f"=D{i}*F{i}"
+
+    # Guardar cambios
+    wb.save(nombre_archivo)
 
     try:
         subir_df_a_sheets(df)
