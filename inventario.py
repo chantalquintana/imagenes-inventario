@@ -14,6 +14,7 @@ import json
 from openpyxl import load_workbook
 
 
+
 def git_push_changes(mensaje_commit="Actualización inventario"):
     try:
         subprocess.run(["git", "add", "."], check=True)
@@ -364,6 +365,24 @@ class InventarioApp:
         if self.tree.identify_region(event.x, event.y) == "separator":
             return "break"
 
+        
+    def mostrar_imagen_en_label(self, ruta):
+        try:
+            imagen = Image.open(ruta)
+
+            ancho_objetivo, alto_objetivo = 230, 230
+
+            imagen.thumbnail((ancho_objetivo, alto_objetivo), Image.LANCZOS)
+            imagen = ImageOps.pad(imagen, (ancho_objetivo, alto_objetivo), color="white", centering=(0.5, 0.5))
+
+            self.imagen_actual = ImageTk.PhotoImage(imagen)
+            self.img_label.configure(image=self.imagen_actual, text="")
+
+        except Exception as e:
+            self.img_label.configure(image="", text="Error\nal cargar\nimagen")
+            print("Error al cargar imagen:", e)
+
+        
     def mostrar_detalle_producto(self, event):
         seleccionado = self.tree.selection()
         if seleccionado:
@@ -435,6 +454,7 @@ class InventarioApp:
         ruta = filedialog.askopenfilename(title="Seleccionar imagen", filetypes=[("Archivos de imagen", "*.jpg;*.jpeg;*.png;*.bmp")])
         if ruta:
             self.imagen_path_var.set(ruta)
+            self.mostrar_imagen_en_label(ruta_imagen)
 
     def validar_campos(self):
         try:
