@@ -308,6 +308,9 @@ class InventarioApp:
         self.txt_descripcion_ampliada.config(state="disabled")
 
         self.tree.bind("<<TreeviewSelect>>", self.mostrar_detalle_producto)
+        self.tree.bind("<<TreeviewSelect>>", self.on_fila_seleccionada)
+
+        self.producto_seleccionado_codigo = None
 
         self.inventario_sheets = InventarioSheets()
         self.df = pd.DataFrame()  # Se asignará en la función de sincronización
@@ -448,6 +451,15 @@ class InventarioApp:
             print("Precio Venta raw:", repr(self.entries["Precio Venta"].get()))
             print("Stock raw:", repr(self.entries["Stock"].get()))
             print("Vendidos raw:", repr(self.entries["Vendidos"].get()))
+
+            precio_compra_str = self.entries["Precio Compra"].get().strip()
+            precio_venta_str = self.entries["Precio Venta"].get().strip()
+            stock_str = self.entries["Stock"].get().strip()
+            vendidos_str = self.entries["Vendidos"].get().strip()
+
+            if not precio_compra_str or not precio_venta_str or not stock_str or not vendidos_str:
+             messagebox.showerror("Error", "Los campos numéricos no pueden estar vacíos.")
+             return None
             
             precio_compra = int(self.entries["Precio Compra"].get())
             precio_venta = int(self.entries["Precio Venta"].get())
@@ -484,6 +496,48 @@ class InventarioApp:
         except Exception as e:
             messagebox.showerror("Error", f"No se pudo copiar la imagen: {e}")
         return ""
+
+    def on_fila_seleccionada(self, event):
+        selected = self.tree.selection()
+        if selected:
+            item = self.tree.item(selected[0])
+            codigo = item["values"][0]
+            producto = self.df[self.df["Código"] == codigo].iloc[0]
+            self.producto_seleccionado_codigo = codigo
+
+            for label in self.entries:
+                valor = producto[label]
+                if pd.isna(valor):
+                    valor = ""
+                self.entries[label].delete(0, tk.END)
+                self.entries[label].insert(0, str(valor))
+
+            nombre_img = producto.get("Imagen", None)
+            if nombre_img:
+                ruta_img = os.path.join(IMG_FOLDER, nombre_img)
+                if os.path.exists(ruta_img):
+                    img = Image.open(ruta_img)
+                    img.thumbnail((230, 230))
+                    self.imagen_producto_actual = ImageTk.PhotoImage(img)
+                    self.img_label.config(image=self.imagen_producto_actual, text="")
+                    self.img_label.image = self.imagen_producto_actual
+                else:
+                    self.img_label.config(image=self.img_generica_tk, text="")
+                    self.img_label.image = self.img_generica_tk
+            else:
+                self.img_label.config(image=self.img_generica_tk, text="")
+                self.img_label.image = self.img_generica_tk
+
+            self.imagen_path_var.set("")
+            self.btn_editar.config(state="normal")
+            self.btn_eliminar.config(state="normal")
+            self.btn_agregar.config(state="disabled")
+
+            self.lbl_nombre_ampliado.config(text=f"Nombre: {producto['Nombre']}")
+            self.txt_descripcion_ampliada.config(state="normal")
+            self.txt_descripcion_ampliada.delete(1.0, tk.END)
+            self.txt_descripcion_ampliada.insert(tk.END, producto["Descripción"])
+            self.txt_descripcion_ampliada.config(state="disabled")
 
 
     def agregar_producto(self):
@@ -522,30 +576,57 @@ class InventarioApp:
         if not seleccionado:
             messagebox.showwarning("Advertencia", "Seleccione un producto para editar.")
             return
+        
         validacion = self.validar_campos()
         if validacion is None:
             return
         nombre, descripcion, precio_compra, precio_venta, stock, vendidos = validacion
         imagen_nombre = self.copiar_imagen(self.imagen_path_var.get())
 
-        codigo = self.tree.item(seleccionado[0])["values"][0]
+        codigo_seleccionado = self.tree.item(seleccionado[0])["values"][0]
 
-        idx = self.df.index[self.df["Código"] == codigo].tolist()
+        #Obtener el índice del producto en el DataFrame
+        idx = self.df.index[self.df["Código"] == codigo_seleccionado].tolist()
         if not idx:
             messagebox.showerror("Error", "Producto no encontrado en el inventario.")
             return
-        idx = idx[0]
+        idx = idx[0]# Tomar el primer (y único) índice
 
+        # Actualizar datos del producto en el DataFrame
         self.df.at[idx, "Nombre"] = nombre
         self.df.at[idx, "Descripción"] = descripcion
         self.df.at[idx, "Precio Compra"] = precio_compra
         self.df.at[idx, "Precio Venta"] = precio_venta
         self.df.at[idx, "Stock"] = stock
         self.df.at[idx, "Vendidos"] = vendidos
+        
         if imagen_nombre:
             self.df.at[idx, "Imagen"] = imagen_nombre
 
-        guardar_df(self.df)
+        # Manejo de la imagen: Si se seleccionó una nueva imagen, se copia y se actualiza el nombre en el DF
+        if self.imagen_path_var.get():
+            ruta_imagen_original = self.imagen_path_var.get()
+            ext = os.path.splitext(ruta_imagen_original)[1]
+            nombre_imagen_nuevo = f"{codigo_seleccionado}{ext}" # Usar el código como nombre de archivo para la imagen
+            destino = os.path.join(IMG_FOLDER, nombre_imagen_nuevo)
+
+            try:
+                # Si ya existe una imagen con ese nombre, la eliminamos primero para no tener duplicados
+                # Esto es importante si el tipo de archivo cambió (ej: de .png a .jpg)
+                imagen_anterior = self.df.at[idx, "Imagen"]
+                if imagen_anterior and os.path.exists(os.path.join(IMG_FOLDER, imagen_anterior)):
+                    if imagen_anterior != nombre_imagen_nuevo: # Evitar borrar si es la misma imagen o mismo nombre
+                        try:
+                            os.remove(os.path.join(IMG_FOLDER, imagen_anterior))
+                        except Exception as e:
+                            print(f"Advertencia: No se pudo eliminar la imagen anterior '{imagen_anterior}': {e}")
+                shutil.copy2(ruta_imagen_original, destino)
+                self.df.at[idx, "Imagen"] = nombre_imagen_nuevo
+            except Exception as e:
+                messagebox.showerror("Error", f"No se pudo copiar la nueva imagen: {e}")
+                return
+
+        guardar_df(self.df)# Guarda el DataFrame actualizado en Excel y Sheets
         self.llenar_tabla(self.df)
         self.limpiar_campos()
         messagebox.showinfo("Éxito", "Producto editado correctamente.")
