@@ -6,8 +6,8 @@
         "precio_compra": 0,
         "precio_venta": 100000,
         "stock": 4,
-        "vendidos": 2,
-        "ganancia": 200000,
+        "vendidos": 3,
+        "ganancia": 300000,
         "inversion": 0,
         "imagen": "imagenes/almohadillaEpsonET2700.png"
     },
