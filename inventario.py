@@ -440,13 +440,15 @@ class InventarioApp:
 
     def validar_campos(self):
         try:
-            precio_compra = int(self.entries["Precio Compra"].get())
-            precio_venta = int(self.entries["Precio Venta"].get())
-            stock = int(self.entries["Stock"].get())
-            vendidos = int(self.entries["Vendidos"].get())
-            
             nombre = self.entries["Nombre"].get().strip()
             descripcion = self.entries["Descripción"].get().strip()
+
+            # Imprimir los valores crudos para depurar
+            print("Precio Compra raw:", repr(self.entries["Precio Compra"].get()))
+            print("Precio Venta raw:", repr(self.entries["Precio Venta"].get()))
+            print("Stock raw:", repr(self.entries["Stock"].get()))
+            print("Vendidos raw:", repr(self.entries["Vendidos"].get()))
+            
             precio_compra = int(self.entries["Precio Compra"].get())
             precio_venta = int(self.entries["Precio Venta"].get())
             stock = int(self.entries["Stock"].get())
