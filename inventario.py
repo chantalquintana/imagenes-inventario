@@ -446,20 +446,14 @@ class InventarioApp:
             nombre = self.entries["Nombre"].get().strip()
             descripcion = self.entries["Descripción"].get().strip()
 
-            # Imprimir los valores crudos para depurar
-            print("Precio Compra raw:", repr(self.entries["Precio Compra"].get()))
-            print("Precio Venta raw:", repr(self.entries["Precio Venta"].get()))
-            print("Stock raw:", repr(self.entries["Stock"].get()))
-            print("Vendidos raw:", repr(self.entries["Vendidos"].get()))
+            #precio_compra_str = self.entries["Precio Compra"].get().strip()
+            #precio_venta_str = self.entries["Precio Venta"].get().strip()
+            #stock_str = self.entries["Stock"].get().strip()
+            #vendidos_str = self.entries["Vendidos"].get().strip()
 
-            precio_compra_str = self.entries["Precio Compra"].get().strip()
-            precio_venta_str = self.entries["Precio Venta"].get().strip()
-            stock_str = self.entries["Stock"].get().strip()
-            vendidos_str = self.entries["Vendidos"].get().strip()
-
-            if not precio_compra_str or not precio_venta_str or not stock_str or not vendidos_str:
-             messagebox.showerror("Error", "Los campos numéricos no pueden estar vacíos.")
-             return None
+            #if not precio_compra_str or not precio_venta_str or not stock_str or not vendidos_str:
+             #messagebox.showerror("Error", "Los campos numéricos no pueden estar vacíos.")
+             #return None
             
             precio_compra = int(self.entries["Precio Compra"].get())
             precio_venta = int(self.entries["Precio Venta"].get())
