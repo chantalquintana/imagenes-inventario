@@ -144,6 +144,28 @@ def crear_imagen_generica(size=(230,230)):
     draw.rectangle([flash_x0, flash_y0, flash_x1, flash_y1], fill=(180,180,180), outline=(120,120,120))
     return img
 
+def cargar_imagen_centrada(ruta, size=(230, 230), color_fondo=(255, 255, 255, 255)):
+    try:
+        img = Image.open(ruta).convert("RGBA")
+
+        # Escalar manteniendo proporción
+        img.thumbnail(size, Image.ANTIALIAS)  # Aquí img queda con tamaño <= size
+
+        # Crear fondo blanco (o transparente) del tamaño deseado
+        fondo = Image.new("RGBA", size, color_fondo)
+
+        # Calcular posición para centrar
+        x = (size[0] - img.width) // 2
+        y = (size[1] - img.height) // 2
+
+        # Pegar imagen en el fondo centrada
+        fondo.paste(img, (x, y), img)
+
+        return fondo.convert("RGB")  # Convertir a RGB para tkinter
+    except Exception as e:
+        print(f"Error cargando imagen: {e}")
+        return None
+
 def subir_df_a_sheets(df):
     creds = Credentials.from_service_account_file(CREDENCIALES_JSON, scopes=SCOPES)
     service = build('sheets', 'v4', credentials=creds)
@@ -385,17 +407,17 @@ class InventarioApp:
             if len(img_nombre) > 0 and img_nombre[0]:
                 ruta_img = os.path.join(IMG_FOLDER, img_nombre[0])
                 if os.path.exists(ruta_img):
-                    try:
-                        img_pil = Image.open(ruta_img)
-                        img_pil.thumbnail((230, 230))
+                    img_pil = cargar_imagen_centrada(ruta_img)
+                    if img_pil:
                         self.imagen_actual = ImageTk.PhotoImage(img_pil)
                         self.img_label.config(image=self.imagen_actual, text="")
-                    except Exception:
+                    else:
                         self.img_label.config(image=self.img_generica_tk, text="")
                 else:
                     self.img_label.config(image=self.img_generica_tk, text="")
             else:
                 self.img_label.config(image=self.img_generica_tk, text="")
+
 
             # Activar botones editar y eliminar
             self.btn_editar.config(state="normal")
@@ -510,17 +532,21 @@ class InventarioApp:
             if nombre_img:
                 ruta_img = os.path.join(IMG_FOLDER, nombre_img)
                 if os.path.exists(ruta_img):
-                    img = Image.open(ruta_img)
-                    img.thumbnail((230, 230))
-                    self.imagen_producto_actual = ImageTk.PhotoImage(img)
-                    self.img_label.config(image=self.imagen_producto_actual, text="")
-                    self.img_label.image = self.imagen_producto_actual
+                    img_pil = cargar_imagen_centrada(ruta_img)
+                    if img_pil:
+                        self.imagen_producto_actual = ImageTk.PhotoImage(img_pil)
+                        self.img_label.config(image=self.imagen_producto_actual, text="")
+                        self.img_label.image = self.imagen_producto_actual
+                    else:
+                        self.img_label.config(image=self.img_generica_tk, text="")
+                        self.img_label.image = self.img_generica_tk
                 else:
                     self.img_label.config(image=self.img_generica_tk, text="")
                     self.img_label.image = self.img_generica_tk
             else:
                 self.img_label.config(image=self.img_generica_tk, text="")
                 self.img_label.image = self.img_generica_tk
+
 
             self.imagen_path_var.set("")
             self.btn_editar.config(state="normal")
