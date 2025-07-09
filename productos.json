@@ -30,8 +30,8 @@
         "precio_compra": 0,
         "precio_venta": 100000,
         "stock": 6,
-        "vendidos": 2,
-        "ganancia": 200000,
+        "vendidos": 7,
+        "ganancia": 700000,
         "inversion": 0,
         "imagen": "imagenes/almohadillaEpsonL550.jpg"
     }
