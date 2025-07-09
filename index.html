@@ -155,6 +155,9 @@ async function cargarProductos() {
   }
 }
 
+setInterval(cargarProductos, 300000);
+window.addEventListener('DOMContentLoaded', cargarProductos);
+
 function mostrarProductos(lista) {
   const catalogo = document.getElementById("catalogo");
   catalogo.innerHTML = "";
