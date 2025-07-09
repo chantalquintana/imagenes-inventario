@@ -83,12 +83,21 @@
   .descripcion.expandida {
     max-height: 1000px;
   } 
+  .descripcion.recortada {
+    max-height: 60px;  /* la que estará recortada inicialmente */
+    overflow: hidden;
+    position: relative;
+  }
   .ver-mas {
-    color: #004080;
+    background: none;
+    border: none;
+    color: #007bff;
     cursor: pointer;
     font-size: 0.9rem;
     margin-top: 10px;
     text-decoration: underline;
+    padding: 0;
+    font-family: inherit;
   }
   .stock {
     font-size: 1rem;
@@ -184,13 +193,23 @@ function mostrarProductos(lista) {
       <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" />
       <div class="info">
         <div class="nombre">${p.nombre}</div>
-        <div class="descripcion" id="desc-${i}">${p.descripcion}</div>
-        <div class="ver-mas" onclick="toggleDescripcion(${i})">Ver más</div>
+        <div class="descripcion recortada" id="desc-${i}">${p.descripcion}</div> 
         <div class="precio">Gs. ${p.precio_venta}</div>
         <div class="stock">Stock: ${p.stock}</div>
       </div>
     `;
     catalogo.appendChild(div);
+
+    // Ahora, chequear si la descripción es larga para mostrar "Ver más"
+    const desc = document.getElementById(`desc-${i}`);
+    if (desc.scrollHeight > 60) { // si el contenido supera la altura recortada
+        const boton = document.createElement('button');
+        boton.className = 'ver-mas';
+        boton.textContent = 'Ver más';
+        boton.addEventListener('click', () => toggleDescripcion(i));
+        desc.parentNode.insertBefore(boton, desc.nextSibling);
+    }   
+
   });
 }
 
@@ -209,8 +228,10 @@ function toggleDescripcion(index) {
 
   if (desc.classList.contains("expandida")) {
     desc.classList.remove("expandida");
+    desc.classList.add("recortada");
     boton.textContent = "Ver más";
   } else {
+    desc.classList.remove("recortada");
     desc.classList.add("expandida");
     boton.textContent = "Ver menos";
   }
