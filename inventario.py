@@ -154,7 +154,7 @@ def cargar_imagen_centrada(ruta, size=(230, 230), color_fondo=(255, 255, 255, 25
             resample = Image.LANCZOS
 
         # Escalar manteniendo proporción
-        img.thumbnail(size, resample)  # Escalar manteniendo proporción
+        img.thumbnail(size, resample)
 
         # Crear fondo blanco (o transparente) del tamaño deseado
         fondo = Image.new("RGBA", size, color_fondo)
