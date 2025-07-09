@@ -146,7 +146,7 @@ let productos = [];
 
 async function cargarProductos() {
   try {
-    const res = await fetch('productos.json');
+    const res = await fetch('productos.json?cachebuster=' + Date.now())
     if (!res.ok) throw new Error('No se pudo cargar productos.json');
     productos = await res.json();
     mostrarProductos(productos);
