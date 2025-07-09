@@ -29,7 +29,7 @@
         "descripcion": "L550 L551 L555 L558 L565 L566 L575 M100 M1030 M105 M1560 M200 M201 M205 WF2010 WF2510 WF2511 WF2512 WF2520 WF2521 WF2528 WF2530 WF2531 WF2532 WF2538 WF2540 WF2541 WF2548 WF2630 WF2631 ET-4500",
         "precio_compra": 0,
         "precio_venta": 100000,
-        "stock": 7,
+        "stock": 6,
         "vendidos": 2,
         "ganancia": 200000,
         "inversion": 0,
