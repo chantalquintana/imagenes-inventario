@@ -75,7 +75,20 @@
   .descripcion {
     font-size: 1rem;
     color: #333;
-    flex-grow: 1;
+    overflow: hidden;
+    max-height: 60px;
+    position: relative;
+    transition: max-height 0.3s ease;
+  }
+  .descripcion.expandida {
+    max-height: 1000px;
+  } 
+  .ver-mas {
+    color: #004080;
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    text-decoration: underline;
   }
   .stock {
     font-size: 1rem;
@@ -163,7 +176,7 @@ window.addEventListener('DOMContentLoaded', cargarProductos);
 function mostrarProductos(lista) {
   const catalogo = document.getElementById("catalogo");
   catalogo.innerHTML = "";
-  lista.forEach(p => {
+  lista.forEach((p,i) => {
     const div = document.createElement("div");
     div.className = "producto";
     div.setAttribute('role', 'listitem');
@@ -171,7 +184,8 @@ function mostrarProductos(lista) {
       <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" />
       <div class="info">
         <div class="nombre">${p.nombre}</div>
-        <div class="descripcion">${p.descripcion}</div>
+        <div class="descripcion" id="desc-${i}">${p.descripcion}</div>
+        <div class="ver-mas" onclick="toggleDescripcion(${i})">Ver más</div>
         <div class="precio">Gs. ${p.precio_venta}</div>
         <div class="stock">Stock: ${p.stock}</div>
       </div>
@@ -188,6 +202,20 @@ function filtrarProductos() {
   );
   mostrarProductos(filtrados);
 }
+
+function toggleDescripcion(index) {
+  const desc = document.getElementById(`desc-${index}`);
+  const boton = desc.nextElementSibling;
+
+  if (desc.classList.contains("expandida")) {
+    desc.classList.remove("expandida");
+    boton.textContent = "Ver más";
+  } else {
+    desc.classList.add("expandida");
+    boton.textContent = "Ver menos";
+  }
+}
+
 
 window.addEventListener('DOMContentLoaded', cargarProductos);
 </script>
