@@ -70,5 +70,17 @@
         "ganancia": 165000,
         "inversion": 245000,
         "imagen": "imagenes/almohadillaYChipEpsonF570.png"
+    },
+    {
+        "codigo": "0FAP5B",
+        "nombre": "Almohadilla + Chip Epson",
+        "descripcion": "SC 23MB F100 F130 F160 F170",
+        "precio_compra": 35000,
+        "precio_venta": 200000,
+        "stock": 11,
+        "vendidos": 16,
+        "ganancia": 2640000,
+        "inversion": 385000,
+        "imagen": "imagenes/almohadillaYChipEpsonF170.png"
     }
 ]
