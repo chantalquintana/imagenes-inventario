@@ -58,5 +58,17 @@
         "ganancia": 2970000,
         "inversion": 350000,
         "imagen": "imagenes/almohadillaYChipEpsonT04D1.png"
+    },
+    {
+        "codigo": "30EI7I",
+        "nombre": "Almohadilla + Chip Epson",
+        "descripcion": "SC F500 F530 F531 F540 F551 F560 F570 F571 T2100 T2170 T3100 T3130 T3160 T3170 T3180 T3480 T5100 T5130 T5160 T5170 T5180",
+        "precio_compra": 35000,
+        "precio_venta": 200000,
+        "stock": 7,
+        "vendidos": 1,
+        "ganancia": 165000,
+        "inversion": 245000,
+        "imagen": "imagenes/almohadillaYChipEpsonF570.png"
     }
 ]
