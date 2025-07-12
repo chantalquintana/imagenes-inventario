@@ -106,5 +106,17 @@
         "ganancia": 1320000,
         "inversion": 0,
         "imagen": "imagenes/almohadillaYChipEpsonC9345.png"
+    },
+    {
+        "codigo": "10ENFV",
+        "nombre": "Almohadilla + Chip Epson C9344",
+        "descripcion": "WF 2810 2830 2835 2850 2851 2930 2950, XP 2100 2105 3100 3105 4100 4101 4105, L3550 L3560 L3590 L5550 L5560 L5590",
+        "precio_compra": 35000,
+        "precio_venta": 200000,
+        "stock": 11,
+        "vendidos": 9,
+        "ganancia": 1485000,
+        "inversion": 385000,
+        "imagen": "imagenes/almohadillaYChipEpsonC9344.png"
     }
 ]
