@@ -166,5 +166,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/cilindroTambordeImagenRicoh.png"
+    },
+    {
+        "codigo": "005TPO",
+        "nombre": "Cilindro de imagen Brother",
+        "descripcion": "HL 5240 5250 5270 5280 5340 5350 5380, DCP 8060 8065 8080 8085 8460 8660, MFC 8480 8670 8860 8870 8890",
+        "precio_compra": 40000,
+        "precio_venta": 80000,
+        "stock": 0,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/cilindroBrother.png"
     }
 ]
