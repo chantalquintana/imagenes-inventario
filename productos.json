@@ -154,5 +154,17 @@
         "ganancia": 140000,
         "inversion": 0,
         "imagen": "imagenes/chipContact.png"
+    },
+    {
+        "codigo": "93J10R",
+        "nombre": "Cilindro o tambor de imagen de fotocopiadora RICOH",
+        "descripcion": "1013 1515 MP201 MP301",
+        "precio_compra": 0,
+        "precio_venta": 150000,
+        "stock": 1,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/cilindroTambordeImagenRicoh.png"
     }
 ]
