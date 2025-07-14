@@ -31,6 +31,35 @@
     height: 70px;
     width: auto;
   }
+
+  /* Nueva barra de login y mensaje */
+  #barra-login {
+    background-color: #e0f0ff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    border-bottom: 2px solid #004080;
+    color: #004080;
+  }
+  #mensaje-login {
+    font-style: italic;
+  }
+  #botones-login button {
+    background-color: #004080;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-left: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  #botones-login button:hover {
+    background-color: #0066cc;
+  }
+
   .catalogo {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -72,15 +101,6 @@
     font-weight: bold;
     margin-top: 10px;
   }
-  .mensaje-precio {
-    font-style: italic;
-    color: #666;
-    background-color: #f3f3f3;
-    padding: 5px 10px;
-    border-radius: 6px;
-    display: inline-block;
-    margin-top: 10px;
-  }
   .descripcion {
     font-size: 1rem;
     color: #333;
@@ -107,11 +127,6 @@
     text-decoration: underline;
     padding: 0;
     font-family: inherit;
-  }
-  .stock {
-    font-size: 1rem;
-    color: #555;
-    margin-top: 5px;
   }
   footer {
     background-color: #004080;
@@ -159,6 +174,15 @@
   <img src="logo_infopar.png" alt="Infopar Paraguay" style="height: 100px; object-fit: contain;" />
 </header>
 
+<!-- Barra Login y Mensaje -->
+<div id="barra-login">
+  <div id="mensaje-login" aria-live="polite"></div>
+  <div id="botones-login">
+    <button id="btn-iniciar-sesion">Iniciar sesión</button>
+    <button id="btn-registrarse">Registrarse</button>
+  </div>
+</div>
+
 <input type="text" id="buscar" placeholder="Buscar producto..." oninput="filtrarProductos()" aria-label="Buscar producto" />
 
 <div class="catalogo" id="catalogo" role="list"></div>
@@ -177,8 +201,24 @@
 <script>
 let productos = [];
 
-// Simulación de login (cambiar a true para ver precios)
-const usuarioLogueado = false;
+// Simulación del estado de usuario (false = no logueado, true = logueado)
+let usuarioLogueado = false;
+
+function actualizarInterfazLogin() {
+  const mensajeLogin = document.getElementById('mensaje-login');
+  const btnIniciar = document.getElementById('btn-iniciar-sesion');
+  const btnRegistrarse = document.getElementById('btn-registrarse');
+
+  if (usuarioLogueado) {
+    mensajeLogin.textContent = '';
+    btnIniciar.style.display = 'none';
+    btnRegistrarse.style.display = 'none';
+  } else {
+    mensajeLogin.textContent = 'Iniciá sesión para ver precios y stock.';
+    btnIniciar.style.display = 'inline-block';
+    btnRegistrarse.style.display = 'inline-block';
+  }
+}
 
 async function cargarProductos() {
   try {
@@ -191,9 +231,6 @@ async function cargarProductos() {
   }
 }
 
-setInterval(cargarProductos, 300000);
-window.addEventListener('DOMContentLoaded', cargarProductos);
-
 function mostrarProductos(lista) {
   const catalogo = document.getElementById("catalogo");
   catalogo.innerHTML = "";
@@ -202,9 +239,13 @@ function mostrarProductos(lista) {
     div.className = "producto";
     div.setAttribute('role', 'listitem');
 
+    // Mostrar precio y stock solo si está logueado
     const contenidoPrecio = usuarioLogueado
       ? `<div class="precio">Gs. ${p.precio_venta}</div>`
-      : `<div class="mensaje-precio">Iniciá sesión para más detalles</div>`;
+      : '';
+    const contenidoStock = usuarioLogueado
+      ? `<div class="stock">Stock: ${p.stock}</div>`
+      : '';
 
     div.innerHTML = `
       <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" />
@@ -212,7 +253,7 @@ function mostrarProductos(lista) {
         <div class="nombre">${p.nombre}</div>
         <div class="descripcion recortada" id="desc-${i}">${p.descripcion}</div> 
         ${contenidoPrecio}
-        <div class="stock">Stock: ${p.stock}</div>
+        ${contenidoStock}
       </div>
     `;
     catalogo.appendChild(div);
@@ -251,6 +292,23 @@ function toggleDescripcion(index) {
     boton.textContent = "Ver menos";
   }
 }
+
+// Simulación botones login y registro (solo alertas por ahora)
+document.getElementById('btn-iniciar-sesion').addEventListener('click', () => {
+  alert('Aquí podés implementar el inicio de sesión.');
+  // Simular login para probar:
+  usuarioLogueado = true;
+  actualizarInterfazLogin();
+  mostrarProductos(productos);
+});
+document.getElementById('btn-registrarse').addEventListener('click', () => {
+  alert('Aquí podés implementar el registro de usuario.');
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+  actualizarInterfazLogin();
+  cargarProductos();
+});
 </script>
 </body>
 </html>
