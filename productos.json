@@ -178,5 +178,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/cilindroBrother.png"
+    },
+    {
+        "codigo": "OP871U",
+        "nombre": "Cabezal Epson",
+        "descripcion": "TMU 220",
+        "precio_compra": 100000,
+        "precio_venta": 300000,
+        "stock": 0,
+        "vendidos": 14,
+        "ganancia": 2800000,
+        "inversion": 0,
+        "imagen": "imagenes/cabezalTMU220.png"
     }
 ]
