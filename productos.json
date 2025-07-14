@@ -214,5 +214,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/cabezalDFX8000.png"
+    },
+    {
+        "codigo": "JXVR93",
+        "nombre": "Caja de Mantenimiento Epson T6712",
+        "descripcion": "WF 6090 6590 8010 8090 8510 8510 8590",
+        "precio_compra": 0,
+        "precio_venta": 300000,
+        "stock": 1,
+        "vendidos": 5,
+        "ganancia": 1500000,
+        "inversion": 0,
+        "imagen": "imagenes/cajaMantenimientoT6712.png"
     }
 ]
