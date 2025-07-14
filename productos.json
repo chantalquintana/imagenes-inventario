@@ -226,5 +226,17 @@
         "ganancia": 1500000,
         "inversion": 0,
         "imagen": "imagenes/JXVR93.png"
+    },
+    {
+        "codigo": "W2YVB8",
+        "nombre": "Caja de Mantenimiento T6714",
+        "descripcion": "WF C814 C860 C869 C878 C879C8190 C8610 C8690",
+        "precio_compra": 0,
+        "precio_venta": 300000,
+        "stock": 3,
+        "vendidos": 2,
+        "ganancia": 600000,
+        "inversion": 0,
+        "imagen": "imagenes/cajaMantenimientoT6714.png"
     }
 ]
