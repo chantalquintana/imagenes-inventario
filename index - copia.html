@@ -72,15 +72,6 @@
     font-weight: bold;
     margin-top: 10px;
   }
-  .mensaje-precio {
-    font-style: italic;
-    color: #666;
-    background-color: #f3f3f3;
-    padding: 5px 10px;
-    border-radius: 6px;
-    display: inline-block;
-    margin-top: 10px;
-  }
   .descripcion {
     font-size: 1rem;
     color: #333;
@@ -93,7 +84,7 @@
     max-height: 1000px;
   } 
   .descripcion.recortada {
-    max-height: 165px;
+    max-height: 165px;  /* la que estará recortada inicialmente */
     overflow: hidden;
     position: relative;
   }
@@ -177,12 +168,9 @@
 <script>
 let productos = [];
 
-// Simulación de login (cambiar a true para ver precios)
-const usuarioLogueado = false;
-
 async function cargarProductos() {
   try {
-    const res = await fetch('productos.json?cachebuster=' + Date.now());
+    const res = await fetch('productos.json?cachebuster=' + Date.now())
     if (!res.ok) throw new Error('No se pudo cargar productos.json');
     productos = await res.json();
     mostrarProductos(productos);
@@ -197,34 +185,31 @@ window.addEventListener('DOMContentLoaded', cargarProductos);
 function mostrarProductos(lista) {
   const catalogo = document.getElementById("catalogo");
   catalogo.innerHTML = "";
-  lista.forEach((p, i) => {
+  lista.forEach((p,i) => {
     const div = document.createElement("div");
     div.className = "producto";
     div.setAttribute('role', 'listitem');
-
-    const contenidoPrecio = usuarioLogueado
-      ? `<div class="precio">Gs. ${p.precio_venta}</div>`
-      : `<div class="mensaje-precio">Iniciá sesión para más detalles</div>`;
-
     div.innerHTML = `
       <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" />
       <div class="info">
         <div class="nombre">${p.nombre}</div>
         <div class="descripcion recortada" id="desc-${i}">${p.descripcion}</div> 
-        ${contenidoPrecio}
+        <div class="precio">Gs. ${p.precio_venta}</div>
         <div class="stock">Stock: ${p.stock}</div>
       </div>
     `;
     catalogo.appendChild(div);
 
+    // Ahora, chequear si la descripción es larga para mostrar "Ver más"
     const desc = document.getElementById(`desc-${i}`);
-    if (desc.scrollHeight > 60) {
-      const boton = document.createElement('button');
-      boton.className = 'ver-mas';
-      boton.textContent = 'Ver más';
-      boton.addEventListener('click', () => toggleDescripcion(i));
-      desc.parentNode.insertBefore(boton, desc.nextSibling);
-    }
+    if (desc.scrollHeight > 60) { // si el contenido supera la altura recortada
+        const boton = document.createElement('button');
+        boton.className = 'ver-mas';
+        boton.textContent = 'Ver más';
+        boton.addEventListener('click', () => toggleDescripcion(i));
+        desc.parentNode.insertBefore(boton, desc.nextSibling);
+    }   
+
   });
 }
 
@@ -251,6 +236,10 @@ function toggleDescripcion(index) {
     boton.textContent = "Ver menos";
   }
 }
+
+
+window.addEventListener('DOMContentLoaded', cargarProductos);
 </script>
 </body>
 </html>
+
