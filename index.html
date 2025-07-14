@@ -31,8 +31,6 @@
     height: 70px;
     width: auto;
   }
-
-  /* Barra login */
   #barra-login {
     background-color: #e0f0ff;
     padding: 15px 30px;
@@ -59,7 +57,6 @@
   #barra-login button:hover {
     background-color: #0066cc;
   }
-
   .catalogo {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -109,25 +106,6 @@
     position: relative;
     transition: max-height 0.3s ease;
   }
-  .descripcion.expandida {
-    max-height: 1000px;
-  } 
-  .descripcion.recortada {
-    max-height: 165px;
-    overflow: hidden;
-    position: relative;
-  }
-  .ver-mas {
-    background: none;
-    border: none;
-    color: #007bff;
-    cursor: pointer;
-    font-size: 0.9rem;
-    margin-top: 10px;
-    text-decoration: underline;
-    padding: 0;
-    font-family: inherit;
-  }
   footer {
     background-color: #004080;
     color: white;
@@ -166,8 +144,6 @@
     border-radius: 5px;
     border: 1px solid #ccc;
   }
-
-  /* Modal general */
   .modal {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -206,9 +182,9 @@
     color: white;
   }
   #cambiar-formulario {
-    margin-top: 15px; 
-    font-size: 0.9rem; 
-    color: #004080; 
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #004080;
     cursor: pointer;
   }
   #cambiar-formulario span {
@@ -221,43 +197,131 @@
   <span>Infopar Paraguay</span>
   <img src="logo_infopar.png" alt="Infopar Paraguay" style="height: 100px; object-fit: contain;" />
 </header>
-
-<!-- Barra login -->
 <div id="barra-login">
   <span id="mensaje-login">Iniciá sesión para ver precios y stock.</span>
   <button id="btn-iniciar-sesion">Iniciar sesión</button>
 </div>
-
 <input type="text" id="buscar" placeholder="Buscar producto..." oninput="filtrarProductos()" aria-label="Buscar producto" />
-
 <div class="catalogo" id="catalogo" role="list"></div>
-
 <footer>
-  <div style="font-size: 1.3rem; margin-bottom: 10px;">
-    📱 <strong>0981912228</strong>
-  </div>
+  <div style="font-size: 1.3rem; margin-bottom: 10px;">📱 <strong>0981912228</strong></div>
   <div class="redes">
-    <a href="https://www.facebook.com/infoparpy" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i> Facebook</a>
-    <a href="https://www.instagram.com/infoparpy?igsh=MWQ0eWRvZ2I2bmlreg==" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i> Instagram</a>
-    <a href="https://wa.me/595981912228" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+    <a href="https://www.facebook.com/infoparpy" target="_blank" rel="noopener"><i class="bi bi-facebook"></i> Facebook</a>
+    <a href="https://www.instagram.com/infoparpy" target="_blank" rel="noopener"><i class="bi bi-instagram"></i> Instagram</a>
+    <a href="https://wa.me/595981912228" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> WhatsApp</a>
   </div>
 </footer>
-
-<!-- Modal único para Login y Registro -->
-<div id="modal-auth" class="modal" role="dialog" aria-modal="true" aria-labelledby="titulo-auth" hidden>
+<div id="modal-auth" class="modal" hidden>
   <div class="modal-contenido">
     <h2 id="titulo-auth">Iniciar sesión</h2>
-    
-    <!-- Formulario inicio de sesión -->
     <form id="form-login">
-      <label for="login-usuario">Usuario o email:</label><br/>
+      <label for="login-usuario">Usuario o email:</label>
       <input type="text" id="login-usuario" required autocomplete="username" /><br/><br/>
-      <label for="login-pass">Contraseña:</label><br/>
+      <label for="login-pass">Contraseña:</label>
       <input type="password" id="login-pass" required autocomplete="current-password" /><br/><br/>
       <button type="submit">Ingresar</button>
     </form>
-
-    <!-- Formulario registro, oculto inicialmente -->
     <form id="form-registro" style="display:none;">
-      <label for="reg-nombre">Nombre completo:</label><br/>
-      <input type="text" id="reg-nombre" required autocomplete="name
+      <label for="reg-nombre">Nombre completo:</label>
+      <input type="text" id="reg-nombre" required autocomplete="name" /><br/><br/>
+      <label for="reg-email">Email:</label>
+      <input type="email" id="reg-email" required autocomplete="email" /><br/><br/>
+      <label for="reg-pass">Contraseña:</label>
+      <input type="password" id="reg-pass" required autocomplete="new-password" /><br/><br/>
+      <label for="reg-pass2">Repetir contraseña:</label>
+      <input type="password" id="reg-pass2" required autocomplete="new-password" /><br/><br/>
+      <button type="submit">Registrarse</button>
+    </form>
+    <div id="cambiar-formulario">¿No tenés cuenta? <span id="link-registro">Registrate aquí</span></div>
+    <button id="cerrar-auth" style="margin-top: 15px; background-color: #ccc; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">Cancelar</button>
+  </div>
+</div>
+<script>
+let productos = [];
+let usuarioLogueado = false;
+async function cargarProductos() {
+  try {
+    const res = await fetch('productos.json?cachebuster=' + Date.now());
+    if (!res.ok) throw new Error('No se pudo cargar productos.json');
+    productos = await res.json();
+    mostrarProductos(productos);
+  } catch (e) {
+    alert("Error cargando productos: " + e.message);
+  }
+}
+function mostrarProductos(lista) {
+  const catalogo = document.getElementById("catalogo");
+  catalogo.innerHTML = "";
+  lista.forEach((p, i) => {
+    const div = document.createElement("div");
+    div.className = "producto";
+    div.innerHTML = `
+      <img src="${p.imagen}" alt="${p.nombre}" />
+      <div class="info">
+        <div class="nombre">${p.nombre}</div>
+        <div class="descripcion">${p.descripcion}</div>
+        ${usuarioLogueado ? `<div class="precio">Gs. ${p.precio_venta}</div><div class="stock">Stock: ${p.stock}</div>` : ''}
+      </div>`;
+    catalogo.appendChild(div);
+  });
+}
+function filtrarProductos() {
+  const texto = document.getElementById("buscar").value.toLowerCase();
+  const filtrados = productos.filter(p =>
+    p.nombre.toLowerCase().includes(texto) ||
+    p.descripcion.toLowerCase().includes(texto)
+  );
+  mostrarProductos(filtrados);
+}
+const modalAuth = document.getElementById('modal-auth');
+const formLogin = document.getElementById('form-login');
+const formRegistro = document.getElementById('form-registro');
+const cambiarFormulario = document.getElementById('cambiar-formulario');
+const btnCerrar = document.getElementById('cerrar-auth');
+document.getElementById('btn-iniciar-sesion').addEventListener('click', () => {
+  modalAuth.hidden = false;
+  mostrarLogin();
+});
+btnCerrar.addEventListener('click', () => {
+  modalAuth.hidden = true;
+});
+function mostrarLogin() {
+  formLogin.style.display = 'block';
+  formRegistro.style.display = 'none';
+  cambiarFormulario.innerHTML = `¿No tenés cuenta? <span id="link-registro">Registrate aquí</span>`;
+  document.getElementById('link-registro').addEventListener('click', mostrarRegistro);
+}
+function mostrarRegistro() {
+  formLogin.style.display = 'none';
+  formRegistro.style.display = 'block';
+  cambiarFormulario.innerHTML = `¿Ya tenés cuenta? <span id="link-login">Iniciá sesión</span>`;
+  document.getElementById('link-login').addEventListener('click', mostrarLogin);
+}
+formLogin.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const usuario = document.getElementById('login-usuario').value.trim();
+  if (usuario !== 'usuario1') {
+    alert('Usuario no registrado. Registrate primero.');
+    mostrarRegistro();
+    return;
+  }
+  usuarioLogueado = true;
+  document.getElementById('mensaje-login').textContent = "Sesión iniciada.";
+  modalAuth.hidden = true;
+  mostrarProductos(productos);
+});
+formRegistro.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const pass1 = document.getElementById('reg-pass').value;
+  const pass2 = document.getElementById('reg-pass2').value;
+  if (pass1 !== pass2) {
+    alert('Las contraseñas no coinciden.');
+    return;
+  }
+  alert('¡Registro exitoso! Ahora podés iniciar sesión.');
+  mostrarLogin();
+});
+window.addEventListener('DOMContentLoaded', cargarProductos);
+</script>
+</body>
+</html>
