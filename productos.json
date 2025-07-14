@@ -130,5 +130,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/bujeDeRodilloSuperiorKyocera.png"
+    },
+    {
+        "codigo": "QNCQC5",
+        "nombre": "Calibrador Vernier",
+        "descripcion": "150mm.",
+        "precio_compra": 0,
+        "precio_venta": 130000,
+        "stock": 4,
+        "vendidos": 4,
+        "ganancia": 520000,
+        "inversion": 0,
+        "imagen": "imagenes/calibrador.png"
     }
 ]
