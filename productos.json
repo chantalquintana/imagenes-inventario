@@ -146,7 +146,7 @@
     {
         "codigo": "ARWXAB",
         "nombre": "Chip contact para cartucho de tóner",
-        "descripcion": "MFP136NW 108A 108W 103A 103W 131A 133PN 136A 138P 138PN 138PNW",
+        "descripcion": "103A 103W 131A 133PN 108A 108W, MFP 136A 136NW 138P 138PN 138PNW",
         "precio_compra": 0,
         "precio_venta": 70000,
         "stock": 7,
