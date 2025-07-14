@@ -262,5 +262,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/cintaFlexlx300+.png"
+    },
+    {
+        "codigo": "VB3KB3",
+        "nombre": "Cinta Flex Scanner Samsung",
+        "descripcion": "CLX3300 CLX3305 M2070 M2876 M3370 M3375 M3870 M3875 M4070 M4075 SCX3400 SCX3405 SCX4833 SCX4835",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 3,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/cintaFlexScannerSamsung.png"
     }
 ]
