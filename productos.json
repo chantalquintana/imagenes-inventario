@@ -118,5 +118,17 @@
         "ganancia": 1485000,
         "inversion": 385000,
         "imagen": "imagenes/almohadillaYChipEpsonC9344.png"
+    },
+    {
+        "codigo": "LFBCJ8",
+        "nombre": "Buje de rodillo superior para Kyocera",
+        "descripcion": "FS 1300 1110 1100 1024 1124 1128 1028 M2810 KM2820 ECOSYS M2030DN M2530 M2035 M2535 P2035 P2135",
+        "precio_compra": 0,
+        "precio_venta": 80000,
+        "stock": 5,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/bujeDeRodilloSuperiorKyocera.png"
     }
 ]
