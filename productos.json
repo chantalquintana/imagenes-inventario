@@ -142,5 +142,17 @@
         "ganancia": 520000,
         "inversion": 0,
         "imagen": "imagenes/calibrador.png"
+    },
+    {
+        "codigo": "ARWXAB",
+        "nombre": "Chip contact para cartucho de tóner",
+        "descripcion": "MFP136NW 108A 108W 103A 103W 131A 133PN 136A 138P 138PN 138PNW",
+        "precio_compra": 0,
+        "precio_venta": 70000,
+        "stock": 7,
+        "vendidos": 2,
+        "ganancia": 140000,
+        "inversion": 0,
+        "imagen": "imagenes/chipContact.png"
     }
 ]
