@@ -190,5 +190,17 @@
         "ganancia": 2800000,
         "inversion": 0,
         "imagen": "imagenes/cabezalTMU220.png"
+    },
+    {
+        "codigo": "U2IK1P",
+        "nombre": "Cabezal Epson",
+        "descripcion": "TM U950",
+        "precio_compra": 0,
+        "precio_venta": 280000,
+        "stock": 0,
+        "vendidos": 6,
+        "ganancia": 1680000,
+        "inversion": 0,
+        "imagen": "imagenes/cabezalTMU950.png"
     }
 ]
