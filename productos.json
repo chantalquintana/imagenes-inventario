@@ -202,5 +202,17 @@
         "ganancia": 1680000,
         "inversion": 0,
         "imagen": "imagenes/cabezalTMU950.png"
+    },
+    {
+        "codigo": "RFTFFD",
+        "nombre": "Cabezal para dfx-8000/8500",
+        "descripcion": "DFX 8000 8500",
+        "precio_compra": 0,
+        "precio_venta": 1200000,
+        "stock": 1,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/cabezalDFX8000.png"
     }
 ]
