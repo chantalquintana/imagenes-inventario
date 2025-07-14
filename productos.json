@@ -250,5 +250,17 @@
         "ganancia": 600000,
         "inversion": 0,
         "imagen": "imagenes/cintaFlexTMU220.png"
+    },
+    {
+        "codigo": "YJZTXE",
+        "nombre": "Cinta Flex Epson",
+        "descripcion": "LX 300+",
+        "precio_compra": 0,
+        "precio_venta": 70000,
+        "stock": 5,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/cintaFlexlx300+.png"
     }
 ]
