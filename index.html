@@ -267,7 +267,7 @@ function mostrarProductos(lista) {
       </div>`;
     catalogo.appendChild(div);
 
-    const desc = document.getElementById(`desc-${i}`);
+    const desc = div.querySelector(`#desc-${i}`);
     if (desc && desc.scrollHeight && desc.scrollHeight > 60) {
      const boton = document.createElement('button');
      boton.className = 'ver-mas';
