@@ -285,16 +285,18 @@ function mostrarProductos(lista) {
   lista.forEach((p, i) => {
     const div = document.createElement("div");
     div.className = "producto";
-    div.innerHTML = 
+    div.innerHTML = `
       <img src="${p.Imagen}" alt="${p.Nombre}" />
       <div class="info">
         <div class="nombre">${p.Nombre}</div>
-        <div class="descripcion recortada" id="desc-${i}">${p.Descripcion}</div>
-        ${usuarioLogueado ? <div class="precio">Gs. ${p["Precio Venta"]}</div><div class="stock">Stock: ${p.Stock}</div> : ''}
-      </div>;
-    catalogo.appendChild(div);
+        <div class="descripcion recortada" id="desc-${i}">${p.Descripción}</div>
+        ${usuarioLogueado ? `<div class="precio">Gs. ${p["Precio Venta"]}</div><div class="stock">Stock: ${p.Stock}</div>` : ''}
+      </div>
+    `;
 
-    const desc = div.querySelector(#desc-${i});
+    catalogo.appendChild(div);
+    
+    const desc = div.querySelector(`#desc-${i}`);
     if (desc && desc.scrollHeight && desc.scrollHeight > 60) {
       const boton = document.createElement('button');
       boton.className = 'ver-mas';
@@ -318,8 +320,8 @@ function mostrarProductos(lista) {
 function filtrarProductos() {
   const texto = document.getElementById("buscar").value.toLowerCase();
   const filtrados = productos.filter(p =>
-    p.nombre.toLowerCase().includes(texto) ||
-    p.descripcion.toLowerCase().includes(texto)
+    p.Nombre.toLowerCase().includes(texto) ||
+    p.Descripción.toLowerCase().includes(texto)
   );
   mostrarProductos(filtrados);
 }
