@@ -272,8 +272,10 @@ function cargarDatos() {
     simpleSheet: false,
     wanted: ['Inventario_Infopar', 'Usuarios'],
     callback: function(data, tabletop) {
+      console.log("Datos recibidos:", data);
       productos = data['Inventario_Infopar'].elements;
       usuarios = data['Usuarios'].elements;
+      console.log("Productos:", productos);
       mostrarProductos(productos);
     }
   });
