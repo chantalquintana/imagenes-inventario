@@ -31,32 +31,6 @@
     height: 70px;
     width: auto;
   }
-  #barra-login {
-    background-color: #e0f0ff;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    font-size: 1.1rem;
-    border-bottom: 2px solid #004080;
-    color: #004080;
-    gap: 10px;
-  }
-  #barra-login span {
-    font-style: italic;
-  }
-  #barra-login button {
-    background-color: #004080;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
-  }
-  #barra-login button:hover {
-    background-color: #0066cc;
-  }
   .catalogo {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -108,10 +82,11 @@
   }
   .descripcion.expandida {
     max-height: 1000px;
-  }
+  } 
   .descripcion.recortada {
-    max-height: 60px;
+    max-height: 165px;  /* la que estará recortada inicialmente */
     overflow: hidden;
+    position: relative;
   }
   .ver-mas {
     background: none;
@@ -119,12 +94,16 @@
     color: #007bff;
     cursor: pointer;
     font-size: 0.9rem;
-    margin-top: 5px;
+    margin-top: 10px;
     text-decoration: underline;
     padding: 0;
     font-family: inherit;
   }
-
+  .stock {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 5px;
+  }
   footer {
     background-color: #004080;
     color: white;
@@ -163,55 +142,6 @@
     border-radius: 5px;
     border: 1px solid #ccc;
   }
-  .modal {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  .modal-contenido {
-    background: white;
-    padding: 25px 30px;
-    border-radius: 10px;
-    max-width: 400px;
-    width: 90%;
-  }
-  .modal-contenido h2 {
-    margin-top: 0;
-    color: #004080;
-  }
-  .modal-contenido form input {
-    width: 100%;
-    padding: 8px 10px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
-  .modal-contenido form button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    background-color: #004080;
-    color: white;
-  }
-  #cambiar-formulario {
-    margin-top: 15px;
-    font-size: 0.9rem;
-    color: #004080;
-    cursor: pointer;
-  }
-  #cambiar-formulario span {
-    text-decoration: underline;
-  }
-  [hidden] {
-    display: none !important;
-  }
 </style>
 </head>
 <body>
@@ -219,171 +149,97 @@
   <span>Infopar Paraguay</span>
   <img src="logo_infopar.png" alt="Infopar Paraguay" style="height: 100px; object-fit: contain;" />
 </header>
-<div id="barra-login">
-  <span id="mensaje-login">Inicie sesión para ver más detalles del los productos.</span>
-  <button id="btn-iniciar-sesion">Iniciar sesión</button>
-</div>
+
 <input type="text" id="buscar" placeholder="Buscar producto..." oninput="filtrarProductos()" aria-label="Buscar producto" />
+
 <div class="catalogo" id="catalogo" role="list"></div>
+
 <footer>
-  <div style="font-size: 1.3rem; margin-bottom: 10px;">📱 <strong>0981912228</strong></div>
+  <div style="font-size: 1.3rem; margin-bottom: 10px;">
+    📱 <strong>0981912228</strong>
+  </div>
   <div class="redes">
-    <a href="https://www.facebook.com/infoparpy" target="_blank" rel="noopener"><i class="bi bi-facebook"></i> Facebook</a>
-    <a href="https://www.instagram.com/infoparpy" target="_blank" rel="noopener"><i class="bi bi-instagram"></i> Instagram</a>
-    <a href="https://wa.me/595981912228" target="_blank" rel="noopener"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+    <a href="https://www.facebook.com/infoparpy" target="_blank" rel="noopener" aria-label="Facebook"><i class="bi bi-facebook"></i> Facebook</a>
+    <a href="https://www.instagram.com/infoparpy?igsh=MWQ0eWRvZ2I2bmlreg==" target="_blank" rel="noopener" aria-label="Instagram"><i class="bi bi-instagram"></i> Instagram</a>
+    <a href="https://wa.me/595981912228" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i> WhatsApp</a>
   </div>
 </footer>
-<div id="modal-auth" class="modal" hidden>
-  <div class="modal-contenido">
-    <h2 id="titulo-auth">Iniciar sesión</h2>
-    <form id="form-login">
-      <label for="login-usuario">Usuario o email:</label>
-      <input type="text" id="login-usuario" required autocomplete="username" /><br/><br/>
-      <label for="login-pass">Contraseña:</label>
-      <input type="password" id="login-pass" required autocomplete="current-password" /><br/><br/>
-      <button type="submit">Ingresar</button>
-    </form>
-    <form id="form-registro" style="display:none;">
-      <label for="reg-nombre">Nombre completo:</label>
-      <input type="text" id="reg-nombre" required autocomplete="name" /><br/><br/>
-      <label for="reg-email">Email:</label>
-      <input type="email" id="reg-email" required autocomplete="email" /><br/><br/>
-      <label for="reg-pass">Contraseña:</label>
-      <input type="password" id="reg-pass" required autocomplete="new-password" /><br/><br/>
-      <label for="reg-pass2">Repetir contraseña:</label>
-      <input type="password" id="reg-pass2" required autocomplete="new-password" /><br/><br/>
-      <button type="submit">Registrarse</button>
-    </form>
-    <div id="cambiar-formulario">¿No tenés cuenta? <span id="link-registro">Registrate aquí</span></div>
-    <button id="cerrar-auth" style="margin-top: 15px; background-color: #ccc; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">Cancelar</button>
-  </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/tabletop@1.6.0/tabletop.min.js"></script>
 
 <script>
 let productos = [];
-let usuarios = [];
-let usuarioLogueado = false;
 
-function cargarDatos() {
-  Tabletop.init({
-    key: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSp1aGupBaFx5GjV-9IsRrv8iDcQ9DzAXLvJyzSOj4p8r-gyoHk41CwDkHKxIBJWPxSeu-uhCcdTysw/pubhtml?gid=1583186701&single=true',
-    simpleSheet: false,
-    wanted: ['Inventario_Infopar', 'Usuarios'],
-    callback: function(data, tabletop) {
-      productos = data['Inventario_Infopar'].elements;
-      usuarios = data['Usuarios'].elements;
-      mostrarProductos(productos);
-    }
-  });
+async function cargarProductos() {
+  try {
+    const res = await fetch('productos.json?cachebuster=' + Date.now())
+    if (!res.ok) throw new Error('No se pudo cargar productos.json');
+    productos = await res.json();
+    mostrarProductos(productos);
+  } catch (e) {
+    alert("Error cargando productos: " + e.message);
+  }
 }
+
+setInterval(cargarProductos, 300000);
+window.addEventListener('DOMContentLoaded', cargarProductos);
 
 function mostrarProductos(lista) {
   const catalogo = document.getElementById("catalogo");
   catalogo.innerHTML = "";
-  lista.forEach((p, i) => {
+  lista.forEach((p,i) => {
     const div = document.createElement("div");
     div.className = "producto";
+    div.setAttribute('role', 'listitem');
     div.innerHTML = `
-      <img src="${p.Imagen}" alt="${p.Nombre}" />
+      <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" />
       <div class="info">
-        <div class="nombre">${p.Nombre}</div>
-        <div class="descripcion recortada" id="desc-${i}">${p.Descripción}</div>
-        ${usuarioLogueado ? `<div class="precio">Gs. ${p["Precio Venta"]}</div><div class="stock">Stock: ${p.Stock}</div>` : ''}
+        <div class="nombre">${p.nombre}</div>
+        <div class="descripcion recortada" id="desc-${i}">${p.descripcion}</div> 
+        <div class="precio">Gs. ${p.precio_venta}</div>
+        <div class="stock">Stock: ${p.stock}</div>
       </div>
     `;
-
     catalogo.appendChild(div);
-    
-    const desc = div.querySelector(`#desc-${i}`);
-    if (desc && desc.scrollHeight && desc.scrollHeight > 60) {
-      const boton = document.createElement('button');
-      boton.className = 'ver-mas';
-      boton.textContent = 'Ver más';
-      boton.addEventListener('click', () => {
-        if (desc.classList.contains("expandida")) {
-          desc.classList.remove("expandida");
-          desc.classList.add("recortada");
-          boton.textContent = "Ver más";
-        } else {
-          desc.classList.add("expandida");
-          desc.classList.remove("recortada");
-          boton.textContent = "Ver menos";
-        }
-      });
-      desc.parentNode.insertBefore(boton, desc.nextSibling);
-    }
+
+    // Ahora, chequear si la descripción es larga para mostrar "Ver más"
+    const desc = document.getElementById(`desc-${i}`);
+    if (desc.scrollHeight > 60) { // si el contenido supera la altura recortada
+        const boton = document.createElement('button');
+        boton.className = 'ver-mas';
+        boton.textContent = 'Ver más';
+        boton.addEventListener('click', () => toggleDescripcion(i));
+        desc.parentNode.insertBefore(boton, desc.nextSibling);
+    }   
+
   });
 }
 
 function filtrarProductos() {
   const texto = document.getElementById("buscar").value.toLowerCase();
   const filtrados = productos.filter(p =>
-    p.Nombre.toLowerCase().includes(texto) ||
-    p.Descripción.toLowerCase().includes(texto)
+    p.nombre.toLowerCase().includes(texto) ||
+    p.descripcion.toLowerCase().includes(texto)
   );
   mostrarProductos(filtrados);
 }
 
-function validarLogin(usuarioIngresado, contrasenaIngresada) {
-  return usuarios.some(u =>
-    u.Usuario === usuarioIngresado && u.Contraseña === contrasenaIngresada
-  );
-}
+function toggleDescripcion(index) {
+  const desc = document.getElementById(`desc-${index}`);
+  const boton = desc.nextElementSibling;
 
-document.getElementById('btn-iniciar-sesion').addEventListener('click', () => {
-  document.getElementById('modal-auth').hidden = false;
-  mostrarLogin();
-});
-
-document.getElementById('cerrar-auth').addEventListener('click', () => {
-  document.getElementById('modal-auth').hidden = true;
-});
-
-function mostrarLogin() {
-  document.getElementById('form-login').style.display = 'block';
-  document.getElementById('form-registro').style.display = 'none';
-  document.getElementById('cambiar-formulario').innerHTML = ¿No tenés cuenta? <span id="link-registro">Registrate aquí</span>;
-  document.getElementById('link-registro').addEventListener('click', mostrarRegistro);
-}
-
-function mostrarRegistro() {
-  document.getElementById('form-login').style.display = 'none';
-  document.getElementById('form-registro').style.display = 'block';
-  document.getElementById('cambiar-formulario').innerHTML = ¿Ya tenés cuenta? <span id="link-login">Iniciá sesión</span>;
-  document.getElementById('link-login').addEventListener('click', mostrarLogin);
-}
-
-document.getElementById('form-login').addEventListener('submit', e => {
-  e.preventDefault();
-  const usuario = document.getElementById('login-usuario').value.trim();
-  const pass = document.getElementById('login-pass').value;
-
-  if(validarLogin(usuario, pass)) {
-    alert('¡Bienvenido, ' + usuario + '!');
-    usuarioLogueado = true;
-    document.getElementById('mensaje-login').textContent = "Sesión iniciada.";
-    document.getElementById('modal-auth').hidden = true;
-    mostrarProductos(productos);
+  if (desc.classList.contains("expandida")) {
+    desc.classList.remove("expandida");
+    desc.classList.add("recortada");
+    boton.textContent = "Ver más";
   } else {
-    alert('Usuario o contraseña incorrectos.');
+    desc.classList.remove("recortada");
+    desc.classList.add("expandida");
+    boton.textContent = "Ver menos";
   }
-});
+}
 
-document.getElementById('form-registro').addEventListener('submit', e => {
-  e.preventDefault();
-  const pass1 = document.getElementById('reg-pass').value;
-  const pass2 = document.getElementById('reg-pass2').value;
-  if (pass1 !== pass2) {
-    alert('Las contraseñas no coinciden.');
-    return;
-  }
-  alert('¡Registro exitoso! Ahora podés iniciar sesión.');
-  mostrarLogin();
-});
 
-window.addEventListener('DOMContentLoaded', cargarDatos);
+window.addEventListener('DOMContentLoaded', cargarProductos);
 </script>
 </body>
 </html>
+
