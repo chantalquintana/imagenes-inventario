@@ -263,18 +263,20 @@
 
 <script>
 let productos = [];
-let usuarioLogueado = false;
 let usuarios = [];
+let usuarioLogueado = false;
 
-async function cargarProductos() {
-  try {
-    const res = await fetch('productos.json?cachebuster=' + Date.now());
-    if (!res.ok) throw new Error('No se pudo cargar productos.json');
-    productos = await res.json();
-    mostrarProductos(productos);
-  } catch (e) {
-    alert("Error cargando productos: " + e.message);
-  }
+function cargarDatos() {
+  Tabletop.init({
+    key: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSp1aGupBaFx5GjV-9IsRrv8iDcQ9DzAXLvJyzSOj4p8r-gyoHk41CwDkHKxIBJWPxSeu-uhCcdTysw/pubhtml?gid=1583186701&single=true',
+    simpleSheet: false,
+    wanted: ['Inventario_Infopar', 'Usuarios'],
+    callback: function(data, tabletop) {
+      productos = data['Inventario_Infopar'].elements;
+      usuarios = data['Usuarios'].elements;
+      mostrarProductos(productos);
+    }
+  });
 }
 
 function mostrarProductos(lista) {
@@ -322,54 +324,36 @@ function filtrarProductos() {
   mostrarProductos(filtrados);
 }
 
-const modalAuth = document.getElementById('modal-auth');
-const formLogin = document.getElementById('form-login');
-const formRegistro = document.getElementById('form-registro');
-const cambiarFormulario = document.getElementById('cambiar-formulario');
-const btnCerrar = document.getElementById('cerrar-auth');
-const btnIniciarSesion = document.getElementById('btn-iniciar-sesion');
+function validarLogin(usuarioIngresado, contrasenaIngresada) {
+  return usuarios.some(u =>
+    u.Usuario === usuarioIngresado && u.Contraseña === contrasenaIngresada
+  );
+}
 
-btnIniciarSesion.addEventListener('click', () => {
-  modalAuth.hidden = false;
+document.getElementById('btn-iniciar-sesion').addEventListener('click', () => {
+  document.getElementById('modal-auth').hidden = false;
   mostrarLogin();
 });
 
-btnCerrar.addEventListener('click', () => {
-  modalAuth.hidden = true;
+document.getElementById('cerrar-auth').addEventListener('click', () => {
+  document.getElementById('modal-auth').hidden = true;
 });
 
 function mostrarLogin() {
-  formLogin.style.display = 'block';
-  formRegistro.style.display = 'none';
-  cambiarFormulario.innerHTML = `¿No tenés cuenta? <span id="link-registro">Registrate aquí</span>`;
+  document.getElementById('form-login').style.display = 'block';
+  document.getElementById('form-registro').style.display = 'none';
+  document.getElementById('cambiar-formulario').innerHTML = `¿No tenés cuenta? <span id="link-registro">Registrate aquí</span>`;
   document.getElementById('link-registro').addEventListener('click', mostrarRegistro);
 }
 
 function mostrarRegistro() {
-  formLogin.style.display = 'none';
-  formRegistro.style.display = 'block';
-  cambiarFormulario.innerHTML = `¿Ya tenés cuenta? <span id="link-login">Iniciá sesión</span>`;
+  document.getElementById('form-login').style.display = 'none';
+  document.getElementById('form-registro').style.display = 'block';
+  document.getElementById('cambiar-formulario').innerHTML = `¿Ya tenés cuenta? <span id="link-login">Iniciá sesión</span>`;
   document.getElementById('link-login').addEventListener('click', mostrarLogin);
 }
 
-function cargarUsuarios() {
-  Tabletop.init({
-    key: 'TU_URL_PUBLICADA_DE_GOOGLE_SHEETS', // <--- Aquí poné la URL pública de tu Google Sheets de usuarios
-    simpleSheet: true,
-    callback: function(data, tabletop) {
-      usuarios = data;
-      console.log('Usuarios cargados:', usuarios);
-    }
-  });
-}
-
-function validarLogin(usuarioIngresado, contrasenaIngresada) {
-  return usuarios.some(u => 
-    u.usuario === usuarioIngresado && u.contraseña === contrasenaIngresada
-  );
-}
-
-formLogin.addEventListener('submit', (e) => {
+document.getElementById('form-login').addEventListener('submit', e => {
   e.preventDefault();
   const usuario = document.getElementById('login-usuario').value.trim();
   const pass = document.getElementById('login-pass').value;
@@ -378,14 +362,14 @@ formLogin.addEventListener('submit', (e) => {
     alert('¡Bienvenido, ' + usuario + '!');
     usuarioLogueado = true;
     document.getElementById('mensaje-login').textContent = "Sesión iniciada.";
-    modalAuth.hidden = true;
+    document.getElementById('modal-auth').hidden = true;
     mostrarProductos(productos);
   } else {
     alert('Usuario o contraseña incorrectos.');
   }
 });
 
-formRegistro.addEventListener('submit', (e) => {
+document.getElementById('form-registro').addEventListener('submit', e => {
   e.preventDefault();
   const pass1 = document.getElementById('reg-pass').value;
   const pass2 = document.getElementById('reg-pass2').value;
@@ -397,10 +381,7 @@ formRegistro.addEventListener('submit', (e) => {
   mostrarLogin();
 });
 
-window.addEventListener('DOMContentLoaded', () => {
-  cargarProductos();
-  cargarUsuarios();
-});
+window.addEventListener('DOMContentLoaded', cargarDatos);
 </script>
 </body>
 </html>
