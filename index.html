@@ -262,28 +262,28 @@ function mostrarProductos(lista) {
       <img src="${p.imagen}" alt="${p.nombre}" />
       <div class="info">
         <div class="nombre">${p.nombre}</div>
-        <div class="descripcion">${p.descripcion}</div>
+        <div class="descripcion recortada" id="desc-${i}">${p.descripcion}</div>
         ${usuarioLogueado ? `<div class="precio">Gs. ${p.precio_venta}</div><div class="stock">Stock: ${p.stock}</div>` : ''}
       </div>`;
     catalogo.appendChild(div);
 
     const desc = div.querySelector(`#desc-${i}`);
     if (desc && desc.scrollHeight && desc.scrollHeight > 60) {
-     const boton = document.createElement('button');
-     boton.className = 'ver-mas';
-     boton.textContent = 'Ver más';
-     boton.addEventListener('click', () => {
-       if (desc.classList.contains("expandida")) {
-         desc.classList.remove("expandida");
-         desc.classList.add("recortada");
-         boton.textContent = "Ver más";
-       } else {
-         desc.classList.add("expandida");
-         desc.classList.remove("recortada");
-         boton.textContent = "Ver menos";
-       }
-     });
-     desc.parentNode.insertBefore(boton, desc.nextSibling);
+      const boton = document.createElement('button');
+      boton.className = 'ver-mas';
+      boton.textContent = 'Ver más';
+      boton.addEventListener('click', () => {
+        if (desc.classList.contains("expandida")) {
+          desc.classList.remove("expandida");
+          desc.classList.add("recortada");
+          boton.textContent = "Ver más";
+        } else {
+          desc.classList.add("expandida");
+          desc.classList.remove("recortada");
+          boton.textContent = "Ver menos";
+        }
+      });
+      desc.parentNode.insertBefore(boton, desc.nextSibling);
     }
   });
 }
