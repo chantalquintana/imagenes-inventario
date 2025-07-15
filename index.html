@@ -258,9 +258,14 @@
     <button id="cerrar-auth" style="margin-top: 15px; background-color: #ccc; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer;">Cancelar</button>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/tabletop@1.6.0/tabletop.min.js"></script>
+
 <script>
 let productos = [];
 let usuarioLogueado = false;
+let usuarios = [];
+
 async function cargarProductos() {
   try {
     const res = await fetch('productos.json?cachebuster=' + Date.now());
@@ -271,6 +276,7 @@ async function cargarProductos() {
     alert("Error cargando productos: " + e.message);
   }
 }
+
 function mostrarProductos(lista) {
   const catalogo = document.getElementById("catalogo");
   catalogo.innerHTML = "";
@@ -292,20 +298,21 @@ function mostrarProductos(lista) {
       boton.className = 'ver-mas';
       boton.textContent = 'Ver más';
       boton.addEventListener('click', () => {
-       if (desc.classList.contains("expandida")) {
-         desc.classList.remove("expandida");
-         desc.classList.add("recortada");
-         boton.textContent = "Ver más";
-       } else {
-         desc.classList.add("expandida");
-         desc.classList.remove("recortada");
-         boton.textContent = "Ver menos";
-       }
-     });
-     desc.parentNode.insertBefore(boton, desc.nextSibling);
-   }
- });
+        if (desc.classList.contains("expandida")) {
+          desc.classList.remove("expandida");
+          desc.classList.add("recortada");
+          boton.textContent = "Ver más";
+        } else {
+          desc.classList.add("expandida");
+          desc.classList.remove("recortada");
+          boton.textContent = "Ver menos";
+        }
+      });
+      desc.parentNode.insertBefore(boton, desc.nextSibling);
+    }
+  });
 }
+
 function filtrarProductos() {
   const texto = document.getElementById("buscar").value.toLowerCase();
   const filtrados = productos.filter(p =>
@@ -314,43 +321,70 @@ function filtrarProductos() {
   );
   mostrarProductos(filtrados);
 }
+
 const modalAuth = document.getElementById('modal-auth');
 const formLogin = document.getElementById('form-login');
 const formRegistro = document.getElementById('form-registro');
 const cambiarFormulario = document.getElementById('cambiar-formulario');
 const btnCerrar = document.getElementById('cerrar-auth');
-document.getElementById('btn-iniciar-sesion').addEventListener('click', () => {
+const btnIniciarSesion = document.getElementById('btn-iniciar-sesion');
+
+btnIniciarSesion.addEventListener('click', () => {
   modalAuth.hidden = false;
   mostrarLogin();
 });
+
 btnCerrar.addEventListener('click', () => {
   modalAuth.hidden = true;
 });
+
 function mostrarLogin() {
   formLogin.style.display = 'block';
   formRegistro.style.display = 'none';
   cambiarFormulario.innerHTML = `¿No tenés cuenta? <span id="link-registro">Registrate aquí</span>`;
   document.getElementById('link-registro').addEventListener('click', mostrarRegistro);
 }
+
 function mostrarRegistro() {
   formLogin.style.display = 'none';
   formRegistro.style.display = 'block';
   cambiarFormulario.innerHTML = `¿Ya tenés cuenta? <span id="link-login">Iniciá sesión</span>`;
   document.getElementById('link-login').addEventListener('click', mostrarLogin);
 }
+
+function cargarUsuarios() {
+  Tabletop.init({
+    key: 'TU_URL_PUBLICADA_DE_GOOGLE_SHEETS', // <--- Aquí poné la URL pública de tu Google Sheets de usuarios
+    simpleSheet: true,
+    callback: function(data, tabletop) {
+      usuarios = data;
+      console.log('Usuarios cargados:', usuarios);
+    }
+  });
+}
+
+function validarLogin(usuarioIngresado, contrasenaIngresada) {
+  return usuarios.some(u => 
+    u.usuario === usuarioIngresado && u.contraseña === contrasenaIngresada
+  );
+}
+
 formLogin.addEventListener('submit', (e) => {
   e.preventDefault();
   const usuario = document.getElementById('login-usuario').value.trim();
-  if (usuario !== 'usuario1') {
-    alert('Usuario no registrado. Registrate primero.');
-    mostrarRegistro();
-    return;
+  const pass = document.getElementById('login-pass').value;
+
+  if(validarLogin(usuario, pass)) {
+    alert('¡Bienvenido, ' + usuario + '!');
+    usuarioLogueado = true;
+    document.getElementById('mensaje-login').textContent = "Sesión iniciada.";
+    modalAuth.hidden = true;
+    mostrarProductos(productos);
+  } else {
+    alert('Usuario o contraseña incorrectos.');
   }
-  usuarioLogueado = true;
-  document.getElementById('mensaje-login').textContent = "Sesión iniciada.";
-  modalAuth.hidden = true;
-  mostrarProductos(productos);
 });
+
 formRegistro.addEventListener('submit', (e) => {
   e.preventDefault();
   const pass1 = document.getElementById('reg-pass').value;
@@ -362,7 +396,11 @@ formRegistro.addEventListener('submit', (e) => {
   alert('¡Registro exitoso! Ahora podés iniciar sesión.');
   mostrarLogin();
 });
-window.addEventListener('DOMContentLoaded', cargarProductos);
+
+window.addEventListener('DOMContentLoaded', () => {
+  cargarProductos();
+  cargarUsuarios();
+});
 </script>
 </body>
 </html>
