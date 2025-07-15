@@ -268,7 +268,7 @@ function mostrarProductos(lista) {
     catalogo.appendChild(div);
 
     const desc = document.getElementById(`desc-${i}`);
-    if (desc.scrollHeight > 60) {
+    if (desc && desc.scrollHeight && desc.scrollHeight > 60) {
      const boton = document.createElement('button');
      boton.className = 'ver-mas';
      boton.textContent = 'Ver más';
