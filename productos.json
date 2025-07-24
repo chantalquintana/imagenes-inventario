@@ -322,5 +322,17 @@
         "ganancia": 200000,
         "inversion": 0,
         "imagen": "imagenes/ChipT04D1Epson.png"
+    },
+    {
+        "codigo": "002SMV",
+        "nombre": "Chip Epson",
+        "descripcion": "T6712",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 10,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/ChipT6712Epson.png"
     }
 ]
