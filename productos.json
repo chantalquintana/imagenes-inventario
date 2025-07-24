@@ -310,5 +310,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/ChipC9344Epson.png"
+    },
+    {
+        "codigo": "AOQWST",
+        "nombre": "Chip Epson",
+        "descripcion": "T04D1",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 28,
+        "vendidos": 2,
+        "ganancia": 200000,
+        "inversion": 0,
+        "imagen": "imagenes/ChipT04D1Epson.png"
     }
 ]
