@@ -358,5 +358,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/ChipDRUMDL410.png"
+    },
+    {
+        "codigo": "UAYYDQ",
+        "nombre": "DMD para proyector 8060-6039B",
+        "descripcion": "Benq MP515 MP515ST NEC NP115 OPTOMA ES526",
+        "precio_compra": 200000,
+        "precio_venta": 400000,
+        "stock": 1,
+        "vendidos": 1,
+        "ganancia": 200000,
+        "inversion": 200000,
+        "imagen": "imagenes/ChipDMDproyector.png"
     }
 ]
