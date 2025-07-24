@@ -370,5 +370,17 @@
         "ganancia": 200000,
         "inversion": 200000,
         "imagen": "imagenes/ChipDMDproyector.png"
+    },
+    {
+        "codigo": "CJVMIV",
+        "nombre": "Correa de transporte Epson",
+        "descripcion": "TM U950",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 7,
+        "vendidos": 3,
+        "ganancia": 300000,
+        "inversion": 0,
+        "imagen": "imagenes/correaTMU950.png"
     }
 ]
