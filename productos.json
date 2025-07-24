@@ -298,5 +298,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/cintaFlexEpsonR1390.png"
+    },
+    {
+        "codigo": "XHNJ3H",
+        "nombre": "Chip Epson",
+        "descripcion": "C9344",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 31,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/ChipC9344Epson.png"
     }
 ]
