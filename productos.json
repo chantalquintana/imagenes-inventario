@@ -245,9 +245,9 @@
         "descripcion": "TM U220",
         "precio_compra": 0,
         "precio_venta": 50000,
-        "stock": 3,
-        "vendidos": 12,
-        "ganancia": 600000,
+        "stock": 0,
+        "vendidos": 15,
+        "ganancia": 750000,
         "inversion": 0,
         "imagen": "imagenes/cintaFlexTMU220.png"
     },
