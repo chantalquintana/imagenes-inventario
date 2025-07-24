@@ -382,5 +382,17 @@
         "ganancia": 300000,
         "inversion": 0,
         "imagen": "imagenes/correaTMU950.png"
+    },
+    {
+        "codigo": "Y6I8Q7",
+        "nombre": "Correa de plotter  HP DesignJet",
+        "descripcion": "500 510 800 815 de 24\"",
+        "precio_compra": 0,
+        "precio_venta": 350000,
+        "stock": 3,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/correaPlotter.png"
     }
 ]
