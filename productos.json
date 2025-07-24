@@ -334,5 +334,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/ChipT6712Epson.png"
+    },
+    {
+        "codigo": "ZL4VQJ",
+        "nombre": "Chip Epson",
+        "descripcion": "F170",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 18,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/ChipF170Epson.png"
     }
 ]
