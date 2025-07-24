@@ -394,5 +394,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/correaPlotter.png"
+    },
+    {
+        "codigo": "O3F6AE",
+        "nombre": "Correa de plotter para impresora HP DesignJet",
+        "descripcion": "500 510 800 815 de 42\"",
+        "precio_compra": 0,
+        "precio_venta": 350000,
+        "stock": 2,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/correaPlotter.png"
     }
 ]
