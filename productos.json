@@ -346,5 +346,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/ZL4VQJ.png"
+    },
+    {
+        "codigo": "LJNL6J",
+        "nombre": "Drum DL-410 para Tambor de Unidad de imagen Pantum",
+        "descripcion": "P3010DW P3300DN P3300DW M6700DW M6800FDW M7100DN M7200FDW M7300FDW M7300FDN",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 9,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/ChipDRUMDL410.png"
     }
 ]
