@@ -348,6 +348,18 @@
         "imagen": "imagenes/ZL4VQJ.png"
     },
     {
+        "codigo": "HGP1Q2",
+        "nombre": "Chip Epson",
+        "descripcion": "C9345",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 20,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/chipC9345.png"
+    },
+    {
         "codigo": "LJNL6J",
         "nombre": "Drum DL-410 para Tambor de Unidad de imagen Pantum",
         "descripcion": "P3010DW P3300DN P3300DW M6700DW M6800FDW M7100DN M7200FDW M7300FDW M7300FDN",
@@ -406,17 +418,5 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/O3F6AE.png"
-    },
-    {
-        "codigo": "HGP1Q2",
-        "nombre": "Chip Epson",
-        "descripcion": "C9345",
-        "precio_compra": 0,
-        "precio_venta": 100000,
-        "stock": 20,
-        "vendidos": 0,
-        "ganancia": 0,
-        "inversion": 0,
-        "imagen": "imagenes/chipC9345.png"
     }
 ]
