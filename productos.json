@@ -430,5 +430,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/cuchillaRicohMP201.png"
+    },
+    {
+        "codigo": "9I7AQO",
+        "nombre": "Cuchilla de limpieza Canon",
+        "descripcion": "IR 1018 1022 1435",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 1,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/cuchillaCanonIr1018.png"
     }
 ]
