@@ -418,5 +418,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/O3F6AE.png"
+    },
+    {
+        "codigo": "USC2X3",
+        "nombre": "Cuchillo de limpieza Ricoh",
+        "descripcion": "Aficio 1013, 120, 1515, 171, MP161 MP201 MP301",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 1,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/cuchillaRicohMP201.png"
     }
 ]
