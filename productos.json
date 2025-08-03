@@ -442,5 +442,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/cuchillaCanonIr1018.png"
+    },
+    {
+        "codigo": "HFTRE4",
+        "nombre": "Cuchilla de limpieza",
+        "descripcion": "TS3525",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 1,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/cuchillaTS3525.png"
     }
 ]
