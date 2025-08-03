@@ -454,5 +454,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/cuchillaTS3525.png"
+    },
+    {
+        "codigo": "889781",
+        "nombre": "Cuchilla de limpieza",
+        "descripcion": "Kyocera KM 1500 1815 1820, FS 1000 1010 1018 1020 1050",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 1,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/cuchillaKyoceraKM1500.png"
     }
 ]
