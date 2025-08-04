@@ -466,5 +466,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/cuchillaKyoceraKM1500.png"
+    },
+    {
+        "codigo": "J0VX6D",
+        "nombre": "Cuchilla de limpieza Ricoh",
+        "descripcion": "Aficio 220 270 1015 1018 1022 1027 1032 2015 2018 2022 2027 2032 3025 3030 3350, MP1800 MP2001 MP2014 MP2352 MP2500 MP2501 MP2510 MP2550 MP2553 MP2851 MP2852 MP3010 MP3053 MP3350 MP3351 MP3352 MP3353",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 1,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/cuchillaRicoh1022.png"
     }
 ]
