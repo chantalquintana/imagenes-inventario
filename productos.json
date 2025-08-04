@@ -41,7 +41,7 @@
         "descripcion": "L1110 L1118 L1119 L1210 L1219 L1250 L3100 L3101 L3110 L3115 L3116 L3118 L3150 L3151 L3156 L3158 L3160 L3165 L3166 L3200 L3210 L3218 L3250 L3253 L3260 L3269 L5190 L5290 ET2710 ET2711 ET2712 ET2714 ET2715 ET2720 ET2721 ET2726",
         "precio_compra": 0,
         "precio_venta": 100000,
-        "stock": 9,
+        "stock": 10,
         "vendidos": 25,
         "ganancia": 2500000,
         "inversion": 0,
