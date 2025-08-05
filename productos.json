@@ -610,5 +610,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/engranajederodilloFusorSamsung.png"
+    },
+    {
+        "codigo": "ZYW2LG",
+        "nombre": "Kit de engranaje de acople de fusor para impresora HP",
+        "descripcion": "LaserJet 5100/5200",
+        "precio_compra": 0,
+        "precio_venta": 180000,
+        "stock": 2,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/engranajeAcopleHP.png"
     }
 ]
