@@ -490,5 +490,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/cuchillaRicoh1018.png"
+    },
+    {
+        "codigo": "XKXDN3",
+        "nombre": "Cartucho Damper Epson",
+        "descripcion": "L1110 L1210 L1250 L3100 L3101 L3110 L3150 L3151 L3160 L3210 L3250 L4150 L4160 L4167 L4260 L5190 L5290 L5590 L6160 L6161 L6170 L6171 L6190 L6191 L6290 ET3750 ET4750",
+        "precio_compra": 25000,
+        "precio_venta": 75000,
+        "stock": 20,
+        "vendidos": 30,
+        "ganancia": 1500000,
+        "inversion": 500000,
+        "imagen": "imagenes/damperEpson.png"
     }
 ]
