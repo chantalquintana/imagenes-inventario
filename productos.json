@@ -666,8 +666,8 @@
         "precio_compra": 20000,
         "precio_venta": 100000,
         "stock": 4,
-        "vendidos": 0,
-        "ganancia": 0,
+        "vendidos": 100,
+        "ganancia": 8000000,
         "inversion": 80000,
         "imagen": "imagenes/engranajeTransmiciondeFusorHP1505.png"
     }
