@@ -514,5 +514,17 @@
         "ganancia": 480000,
         "inversion": 0,
         "imagen": "imagenes/planchaParaSoldar.png"
+    },
+    {
+        "codigo": "STLS4V",
+        "nombre": "Extractor de abolladuras",
+        "descripcion": "",
+        "precio_compra": 22000,
+        "precio_venta": 75000,
+        "stock": 1,
+        "vendidos": 22,
+        "ganancia": 1166000,
+        "inversion": 22000,
+        "imagen": "imagenes/extractordeAbolladuras.png"
     }
 ]
