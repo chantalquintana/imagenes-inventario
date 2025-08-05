@@ -562,5 +562,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/kitEngranajesRicoh1022.png"
+    },
+    {
+        "codigo": "XDR4AZ",
+        "nombre": "Kit de engranajes para unidad de revelado RICOH",
+        "descripcion": "Aficio 1515, MP161 MP171 MP175 MP201 MP301",
+        "precio_compra": 0,
+        "precio_venta": 80000,
+        "stock": 9,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/kitEngranajesRicoh1515.png"
     }
 ]
