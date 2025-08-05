@@ -538,5 +538,17 @@
         "ganancia": 100000,
         "inversion": 0,
         "imagen": "imagenes/engranajedeCintaTMU.png"
+    },
+    {
+        "codigo": "7Y9H5R",
+        "nombre": "Kit de engranaje de alimentación de papel Epson",
+        "descripcion": "TM U220",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 5,
+        "vendidos": 1,
+        "ganancia": 100000,
+        "inversion": 0,
+        "imagen": "imagenes/engranajedeAlimentacionTMU220.png"
     }
 ]
