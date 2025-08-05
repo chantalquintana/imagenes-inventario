@@ -658,5 +658,17 @@
         "ganancia": 87000,
         "inversion": 126000,
         "imagen": "imagenes/engranajeRicohC2003.png"
+    },
+    {
+        "codigo": "8N43SX",
+        "nombre": "Engranje de transmición del fusor HP",
+        "descripcion": "P1505 P1506 P1566 P1606 M1120 M1522 M1536",
+        "precio_compra": 20000,
+        "precio_venta": 100000,
+        "stock": 4,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 80000,
+        "imagen": "imagenes/engranajeTransmiciondeFusorHP1505.png"
     }
 ]
