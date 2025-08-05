@@ -550,5 +550,17 @@
         "ganancia": 100000,
         "inversion": 0,
         "imagen": "imagenes/engranajedeAlimentacionTMU220.png"
+    },
+    {
+        "codigo": "WMC70K",
+        "nombre": "Kit de engranajes Premium 411018 RICOH",
+        "descripcion": "Aficio 1022 1027 1032 2022 2027 2032 3030 3025 3350 3351 2550 2510 2851 2852 Savin 7025",
+        "precio_compra": 0,
+        "precio_venta": 80000,
+        "stock": 8,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/kitEngranajesRicoh1022.png"
     }
 ]
