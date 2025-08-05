@@ -586,5 +586,17 @@
         "ganancia": 1250000,
         "inversion": 0,
         "imagen": "imagenes/engranajedeCobrePlotter.png"
+    },
+    {
+        "codigo": "IOLCNV",
+        "nombre": "Kit de engranaje de embrague para bandeja Epson",
+        "descripcion": "L3100 L3101 L3110 L3115 L3116 L3150 L3151 L3156 L3158 L3160 L4150 L4160 L4165 L5190 L6178 L6198",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 5,
+        "vendidos": 4,
+        "ganancia": 400000,
+        "inversion": 0,
+        "imagen": "imagenes/engranajedeEmbragueEpson.png"
     }
 ]
