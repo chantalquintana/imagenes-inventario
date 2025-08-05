@@ -526,5 +526,17 @@
         "ganancia": 1166000,
         "inversion": 22000,
         "imagen": "imagenes/extractordeAbolladuras.png"
+    },
+    {
+        "codigo": "60OWJY",
+        "nombre": "Engranaje de cinta Epson",
+        "descripcion": "TM U220",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 1,
+        "vendidos": 1,
+        "ganancia": 100000,
+        "inversion": 0,
+        "imagen": "imagenes/engranajedeCintaTMU.png"
     }
 ]
