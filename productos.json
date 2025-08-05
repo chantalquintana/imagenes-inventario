@@ -574,5 +574,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/kitEngranajesRicoh1515.png"
+    },
+    {
+        "codigo": "O0PI5Q",
+        "nombre": "Engranaje de cobre para cuchilla de Plotter HP",
+        "descripcion": "T120 T125 T130 T210 T250 T230 T520 T525 T530 T630 T650 T730 T830",
+        "precio_compra": 0,
+        "precio_venta": 250000,
+        "stock": 7,
+        "vendidos": 5,
+        "ganancia": 1250000,
+        "inversion": 0,
+        "imagen": "imagenes/engranajedeCobrePlotter.png"
     }
 ]
