@@ -502,5 +502,17 @@
         "ganancia": 1500000,
         "inversion": 500000,
         "imagen": "imagenes/damperEpson.png"
+    },
+    {
+        "codigo": "JH55X7",
+        "nombre": "Estación o plancha para soldar y desoldar LED TV",
+        "descripcion": "",
+        "precio_compra": 0,
+        "precio_venta": 120000,
+        "stock": 3,
+        "vendidos": 4,
+        "ganancia": 480000,
+        "inversion": 0,
+        "imagen": "imagenes/planchaParaSoldar.png"
     }
 ]
