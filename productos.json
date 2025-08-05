@@ -622,5 +622,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/engranajeAcopleHP.png"
+    },
+    {
+        "codigo": "H8XIZ4",
+        "nombre": "Engranaje de acople de fusor de eje oscilante para HP",
+        "descripcion": "Pro 400 M401 M425",
+        "precio_compra": 0,
+        "precio_venta": 150000,
+        "stock": 1,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/engranajeAcopleEjeOscilante.png"
     }
 ]
