@@ -634,5 +634,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/engranajeAcopleEjeOscilante.png"
+    },
+    {
+        "codigo": "D3G7WT",
+        "nombre": "Engranaje de combinación para impresora Epson",
+        "descripcion": "LX 300+",
+        "precio_compra": 0,
+        "precio_venta": 50000,
+        "stock": 9,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/engranajeCombinacionLX300.png"
     }
 ]
