@@ -197,9 +197,9 @@
         "descripcion": "TM U950",
         "precio_compra": 0,
         "precio_venta": 300000,
-        "stock": 2,
-        "vendidos": 6,
-        "ganancia": 1800000,
+        "stock": 1,
+        "vendidos": 7,
+        "ganancia": 2100000,
         "inversion": 0,
         "imagen": "imagenes/cabezalTMU950.png"
     },
