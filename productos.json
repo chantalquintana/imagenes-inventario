@@ -353,7 +353,7 @@
         "descripcion": "C9345",
         "precio_compra": 0,
         "precio_venta": 100000,
-        "stock": 20,
+        "stock": 10,
         "vendidos": 0,
         "ganancia": 0,
         "inversion": 0,
