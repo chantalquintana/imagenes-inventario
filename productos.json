@@ -101,10 +101,10 @@
         "descripcion": "L6550 L6570 L6580 L8050 L8160 L8168 L8180 L8188 L11160 L15140 L15150 L15158, L15160 L15168 L15180 L18150, ET 5800 5150 5850 5880 16150 16600 16650, WF 3820 4820 4830 7800 7820 7830 7840 7845, ET M15140 M16600, ST C8000, EC C7000,  ITS L6550 L6570 L6580, PX M6010F M6011F M6711FT M6712FT  M791FT S6710T, EW M873, TEW M973A3",
         "precio_compra": 35000,
         "precio_venta": 200000,
-        "stock": 0,
+        "stock": 10,
         "vendidos": 8,
         "ganancia": 1320000,
-        "inversion": 0,
+        "inversion": 350000,
         "imagen": "imagenes/almohadillaYChipEpsonC9345.png"
     },
     {
