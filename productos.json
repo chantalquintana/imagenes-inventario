@@ -673,7 +673,7 @@
     },
     {
         "codigo": "EVDFZI",
-        "nombre": "Fusible de chip de reinicio de tambor",
+        "nombre": "Fusible de reinicio de tambor",
         "descripcion": "OKI C3300 C3400 C3600 C5600 C5700 5650 5750 5500 5800 5900 5850 5950 8600 8800 9600 9800 9650 C9850 4010D 431D B411 431 432 332 363 MB441 MB451 461 491",
         "precio_compra": 10000,
         "precio_venta": 50000,
