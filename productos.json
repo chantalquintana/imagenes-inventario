@@ -670,5 +670,17 @@
         "ganancia": 0,
         "inversion": 80000,
         "imagen": "imagenes/engranajeTransmiciondeFusorHP1505.png"
+    },
+    {
+        "codigo": "EVDFZI",
+        "nombre": "Fusible de chip de reinicio de tambor",
+        "descripcion": "3300 3400 3600 5600 5700 5650 5750 5500 5800 5900 5850 5950 8600 8800 9600 9800 9650 C9850 4010D 431D B411 431 432 332 363 MB441 MB451 461 491",
+        "precio_compra": 10000,
+        "precio_venta": 50000,
+        "stock": 19,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 190000,
+        "imagen": ""
     }
 ]
