@@ -702,4 +702,11 @@ class InventarioApp:
 if __name__ == "__main__":
     root = tk.Tk()
     app = InventarioApp(root)
+
+    # Mostrar imagen inicial antes de cualquier selección
+    imagen_inicial = tk.PhotoImage(file="insumosfotocopiadoras.png")  
+    label_imagen = tk.Label(root, image=imagen_inicial)
+    label_imagen.image = imagen_inicial  # evita que Python elimine la referencia
+    label_imagen.pack()  # o .place(x=?, y=?) si querés posicionarla
+
     root.mainloop()
