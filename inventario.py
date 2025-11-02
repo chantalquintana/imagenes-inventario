@@ -704,7 +704,7 @@ if __name__ == "__main__":
     app = InventarioApp(root)
 
     # Mostrar imagen inicial antes de cualquier selección
-    imagen_inicial = tk.PhotoImage(file="insumosfotocopiadoras.png")  
+    imagen_inicial = tk.PhotoImage(file=r"C:\Users\quint\Desktop\inventario infopar\insumosfotocopiadoras.png")  
     label_imagen = tk.Label(root, image=imagen_inicial)
     label_imagen.image = imagen_inicial  # evita que Python elimine la referencia
     label_imagen.pack()  # o .place(x=?, y=?) si querés posicionarla
