@@ -686,13 +686,13 @@
     {
         "codigo": "0OMKJG",
         "nombre": "Film de fusor HP",
-        "descripcion": "P4010 P4014 P4015 P4510 P4515 M455 M600 M601 M602 M603 M604 M605 M606 M630",
+        "descripcion": "P4010 P4014 P4015 P4510 P4515 M4555 M600 M601 M602 M603 M604 M605 M606 M630",
         "precio_compra": 0,
         "precio_venta": 220000,
         "stock": 3,
         "vendidos": 0,
         "ganancia": 0,
         "inversion": 0,
-        "imagen": ""
+        "imagen": "imagenes/0OMKJG.png"
     }
 ]
