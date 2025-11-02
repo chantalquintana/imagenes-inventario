@@ -802,17 +802,5 @@
         "ganancia": 0,
         "inversion": 375000,
         "imagen": "imagenes/film de fusor ricoh c3300.png"
-    },
-    {
-        "codigo": "RNKKTG",
-        "nombre": "Film de fusor HP",
-        "descripcion": "1600 2600 2605, CP1025 CP1215 CP1515 CP1518 CP1525 CP2025 M175 M176 M177 M275 M276 M351 M375 M451 M475 M476 , CM1015 CM1017 CM1312 CM1415 CM2320",
-        "precio_compra": 50000,
-        "precio_venta": 150000,
-        "stock": 9,
-        "vendidos": 0,
-        "ganancia": 0,
-        "inversion": 450000,
-        "imagen": ""
     }
 ]
