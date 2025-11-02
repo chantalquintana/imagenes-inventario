@@ -754,5 +754,17 @@
         "ganancia": 5440000,
         "inversion": 735000,
         "imagen": "imagenes/0RR43W.png"
+    },
+    {
+        "codigo": "PC1FA4",
+        "nombre": "Film de fusor amarillo HP",
+        "descripcion": "1300 1320 Pro 400, M102 M104 M106 M125 M126 M127 M128 M130 M201 M203 M225 M227 M304 M305 M329 M400 M401 M402 M425 M426 M1136 M1212 M1213 M1216 M1217 M1536 M2727 P1000 P1005 P1010 P1012 P1015 P1018 P1022 P1050 P1102 P1106 P1150 P1160 P1200 P1220 P1606 P2014 P2015 P2030 P2035 P2055 P3010 P3011 P3015 P3016 P3018 P3020 P3030 P3050 P3055",
+        "precio_compra": 10000,
+        "precio_venta": 70000,
+        "stock": 0,
+        "vendidos": 12,
+        "ganancia": 720000,
+        "inversion": 0,
+        "imagen": "imagenes/fil de fusor amarillo HP P1102.png"
     }
 ]
