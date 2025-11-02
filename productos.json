@@ -778,5 +778,17 @@
         "ganancia": 330000,
         "inversion": 400000,
         "imagen": "imagenes/fil fusor del medio hp m477.png"
+    },
+    {
+        "codigo": "EUG3NX",
+        "nombre": "Film fusor inferior HP/CANON",
+        "descripcion": "HP M252 M277 M377 M477 M452 M454 M455 M479, Canon MF 732 734 735",
+        "precio_compra": 40000,
+        "precio_venta": 150000,
+        "stock": 3,
+        "vendidos": 4,
+        "ganancia": 440000,
+        "inversion": 120000,
+        "imagen": "imagenes/fil fusor inferior hp m477.png"
     }
 ]
