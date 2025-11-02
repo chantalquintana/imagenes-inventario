@@ -790,5 +790,17 @@
         "ganancia": 440000,
         "inversion": 120000,
         "imagen": "imagenes/EUG3NX.png"
+    },
+    {
+        "codigo": "86KYC8",
+        "nombre": "Film de fusor Ricoh",
+        "descripcion": "MPC 2000 2500 2800 3000 3300 3500 4500, SP810",
+        "precio_compra": 375000,
+        "precio_venta": 650000,
+        "stock": 1,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 375000,
+        "imagen": "imagenes/film de fusor ricoh c3300.png"
     }
 ]
