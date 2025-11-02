@@ -766,5 +766,17 @@
         "ganancia": 720000,
         "inversion": 0,
         "imagen": "imagenes/fil de fusor amarillo HP P1102.png"
+    },
+    {
+        "codigo": "QZMWMK",
+        "nombre": "Fil de fusor del medio HP/CANON",
+        "descripcion": "HP M252 M277 M377 M477 M452 M454 M455 M479, Canon MF 732 734 735",
+        "precio_compra": 40000,
+        "precio_venta": 150000,
+        "stock": 10,
+        "vendidos": 3,
+        "ganancia": 330000,
+        "inversion": 400000,
+        "imagen": "imagenes/fil fusor del medio hp m477.png"
     }
 ]
