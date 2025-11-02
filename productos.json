@@ -718,5 +718,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/film fusor HP 5200.png"
+    },
+    {
+        "codigo": "MJKH1J",
+        "nombre": "Film de fusor Samsung",
+        "descripcion": "ML 4510 4512 4580 4583 5010 5012 5015, CLP 615 620 670, SL M4580, CLX 8380",
+        "precio_compra": 0,
+        "precio_venta": 350000,
+        "stock": 2,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/film fusorsamsung 4510.png"
     }
 ]
