@@ -48,6 +48,8 @@ CREDENCIALES_JSON = 'inventarioinfopar-d0cf52f91f49.json'
 SPREADSHEET_ID = '1Cgo4C--ByZikIPyXvZJtnBsCjOM4W9fju_N3O9T-3V0'
 SHEET_NAME = 'Inventario_Infopar'
 
+RUTA_IMAGEN_PLACEHOLDER = "insumosfotocopiadoras.png"
+
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
 
 class InventarioSheets:
@@ -118,31 +120,32 @@ def guardar_df(df):
 
     git_push_changes("Actualización automática del inventario, Google Sheets y productos.json")
 
-def crear_imagen_generica(size=(230,230)):
-    img = Image.new("RGBA", size, (220, 220, 220, 255))
-    draw = ImageDraw.Draw(img)
-    w, h = size
-    rect_w, rect_h = w*0.7, h*0.5
-    rect_x0 = (w - rect_w) // 2
-    rect_y0 = (h - rect_h) // 2 + 20
-    rect_x1 = rect_x0 + rect_w
-    rect_y1 = rect_y0 + rect_h
-    draw.rectangle([rect_x0, rect_y0, rect_x1, rect_y1], fill=(150,150,150,255), outline=(100,100,100))
-    lens_radius = rect_h * 0.3
-    lens_center = (w//2, rect_y0 + rect_h//2)
-    draw.ellipse([
-        lens_center[0]-lens_radius,
-        lens_center[1]-lens_radius,
-        lens_center[0]+lens_radius,
-        lens_center[1]+lens_radius
-    ], fill=(200,200,200), outline=(120,120,120))
-    flash_w, flash_h = rect_w * 0.2, rect_h * 0.2
-    flash_x0 = rect_x1 - flash_w - 10
-    flash_y0 = rect_y0 - flash_h - 5
-    flash_x1 = flash_x0 + flash_w
-    flash_y1 = flash_y0 + flash_h
-    draw.rectangle([flash_x0, flash_y0, flash_x1, flash_y1], fill=(180,180,180), outline=(120,120,120))
-    return img
+# --- FUNCIÓN PARA CARGAR LA IMAGEN DE PLACEHOLDER ---
+def cargar_placeholder_personalizado(ruta_placeholder, size=(230, 230)):
+    try:
+        # Abre la imagen desde la ruta especificada
+        img = Image.open(ruta_placeholder).convert("RGBA")
+
+        try:
+            resample = Image.Resampling.LANCZOS
+        except AttributeError:
+            resample = Image.LANCZOS
+
+        # Escala la imagen para que encaje en el marco 230x230
+        img.thumbnail(size, resample) 
+
+        # Crear fondo blanco para centrar la imagen pequeña si es necesario
+        fondo = Image.new("RGBA", size, (255, 255, 255, 255))
+        x = (size[0] - img.width) // 2
+        y = (size[1] - img.height) // 2
+        fondo.paste(img, (x, y), img)
+
+        return fondo.convert("RGB")
+    except Exception as e:
+        print(f"Error cargando imagen placeholder: {e}")
+        # Retorna una imagen genérica si falla la carga (puedes omitir esto si quieres que falle si no encuentra la imagen)
+        img_falla = Image.new("RGB", size, color='lightgray')
+        return img_falla
 
 def cargar_imagen_centrada(ruta, size=(230, 230), color_fondo=(255, 255, 255, 255)):
     try:
@@ -261,8 +264,12 @@ class InventarioApp:
         self.img_label = tk.Label(self.right_frame, text="Imagen del Producto", relief="groove")
         self.img_label.place(relx=0.5, rely=0.5, anchor="center", width=230, height=230)
 
-        img_generica_pil = crear_imagen_generica()
-        self.img_generica_tk = ImageTk.PhotoImage(img_generica_pil)
+        # *** Carga tu imagen específica desde tu PC como placeholder ***
+        img_placeholder_pil = cargar_placeholder_personalizado(RUTA_IMAGEN_PLACEHOLDER)
+        self.img_generica_tk = ImageTk.PhotoImage(img_placeholder_pil)
+        
+        # Muestra el placeholder inmediatamente (opcional)
+        self.img_label.config(image=self.img_generica_tk, text="")
 
         bottom_frame = tk.Frame(root)
         bottom_frame.pack(fill="both", expand=True, padx=10, pady=10)
@@ -702,11 +709,4 @@ class InventarioApp:
 if __name__ == "__main__":
     root = tk.Tk()
     app = InventarioApp(root)
-
-    # Mostrar imagen inicial antes de cualquier selección
-    imagen_inicial = tk.PhotoImage(file=r"C:\Users\quint\Desktop\inventario infopar\insumosfotocopiadoras.png")  
-    label_imagen = tk.Label(root, image=imagen_inicial)
-    label_imagen.image = imagen_inicial  # evita que Python elimine la referencia
-    label_imagen.pack()  # o .place(x=?, y=?) si querés posicionarla
-
     root.mainloop()
