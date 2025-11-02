@@ -730,5 +730,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/MJKH1J.png"
+    },
+    {
+        "codigo": "Y5LR9J",
+        "nombre": "Film de fusor Brother",
+        "descripcion": "HL L5000 L5100 L5200, DCP L5500 5580 5585 5590 L5600 L5650 8150 8155, MFC L5700 L5750 L5755 L5800 L5850 L5900 L6200 L6250 L6300 L6400 L6700 L6750 L6800 L6900 8530 8535 8540",
+        "precio_compra": 0,
+        "precio_venta": 150000,
+        "stock": 0,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/fil de fusor brother l6200.png"
     }
 ]
