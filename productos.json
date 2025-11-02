@@ -694,5 +694,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/0OMKJG.png"
+    },
+    {
+        "codigo": "8OJEKV",
+        "nombre": "Film de fusor Brother",
+        "descripcion": "HL 5440 5445 5450 5452 5455 5470 5472 5580 5585 5590 5595 6180 6182 6200 6300 7810, DCP 8110 8112 8150 8152 8155 8510, MFC 8510 8512 8515 8520 8710 8712 8910 8912 8950 8952",
+        "precio_compra": 100000,
+        "precio_venta": 200000,
+        "stock": 3,
+        "vendidos": 1,
+        "ganancia": 100000,
+        "inversion": 300000,
+        "imagen": "imagenes/film fusor brother hl 5440.png"
     }
 ]
