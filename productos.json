@@ -982,5 +982,17 @@
         "ganancia": 0,
         "inversion": 58500,
         "imagen": "imagenes/rodillo de recogida de papel  RM1-1497-000 P1505.png"
+    },
+    {
+        "codigo": "EKSN87",
+        "nombre": "Rodillo de recogida de papel RL1-1442-000 para HP",
+        "descripcion": "P1005 P1006 P1007 P1008 P1009 P1106 P1108 P1106 P1102 CP1025 M102 M175 M176 M1132 M1136 M1212 M1213 M1214 M1216 M1217",
+        "precio_compra": 6500,
+        "precio_venta": 50000,
+        "stock": 35,
+        "vendidos": 31,
+        "ganancia": 1348500,
+        "inversion": 227500,
+        "imagen": "imagenes/rodillo de recogida de papel  RL1-1442-000  p1102.png"
     }
 ]
