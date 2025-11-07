@@ -814,5 +814,17 @@
         "ganancia": 0,
         "inversion": 450000,
         "imagen": "imagenes/film de fusor hp cp1025.png"
+    },
+    {
+        "codigo": "T2DX9Z",
+        "nombre": "Goma de rodillo de papel para Samsung",
+        "descripcion": "CLX 2160 3160, CLP 300 350, ML 1610 1615 1640 1641 2010 2015 2240 2241 2245, SCX 4321 4521, XP 3117 3122 3124 6110, X WC PE220",
+        "precio_compra": 0,
+        "precio_venta": 50000,
+        "stock": 8,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/goma de rodillo de papel samsung clx 2160.png"
     }
 ]
