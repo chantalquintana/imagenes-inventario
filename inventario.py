@@ -93,6 +93,13 @@ def guardar_df(df):
     wb = load_workbook(nombre_archivo)
     ws = wb.active
 
+    # Aplicar formato con separador de miles
+    from openpyxl.styles import numbers
+    for col in ["D", "E", "H", "I"]:  # D=Precio Compra, E=Precio Venta, H=Ganancia, I=Inversión
+       for i in range(2, ws.max_row + 1):
+         celda = ws[f"{col}{i}"]
+         celda.number_format = "#,##0"  # Esto mostrará 1.000 en Excel
+
     # Encabezados de fórmulas (si no están ya)
     ws["H1"] = "Ganancia"
     ws["I1"] = "Inversión"
@@ -449,12 +456,12 @@ class InventarioApp:
                 str(row["Código"]),
                 row["Nombre"],
                 row["Descripción"],
-                f"{int(row['Precio Compra'])}",
-                f"{int(row['Precio Venta'])}",
+                f"{int(row['Precio Compra']):,}".replace(",", "."),
+                f"{int(row['Precio Venta']):,}".replace(",", "."),
                 f"{int(row['Stock'])}",
                 f"{int(row['Vendidos'])}",
-                f"{int(row['Ganancia'])}",
-                f"{int(row['Inversión'])}"
+                f"{int(row['Ganancia']):,}".replace(",", "."),
+                f"{int(row['Inversión']):,}".replace(",", ".")
             )
             self.tree.insert("", "end", values=valores)
             
