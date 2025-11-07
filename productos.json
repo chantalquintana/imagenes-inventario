@@ -886,5 +886,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/goma separdor de bandeja samsung.png"
+    },
+    {
+        "codigo": "AVWLLD",
+        "nombre": "Kit Reparo de placa de impresoras Epson",
+        "descripcion": "E09A88GA + Transistores C6144  y A2222",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 19,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/kit de reparo placa Epson.png"
     }
 ]
