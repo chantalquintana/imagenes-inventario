@@ -934,5 +934,17 @@
         "ganancia": 72000,
         "inversion": 210000,
         "imagen": "imagenes/led con base 6volt.png"
+    },
+    {
+        "codigo": "JZT1M4",
+        "nombre": "Motor para contador de billetes",
+        "descripcion": "9V 110Rpm",
+        "precio_compra": 0,
+        "precio_venta": 180000,
+        "stock": 2,
+        "vendidos": 2,
+        "ganancia": 360000,
+        "inversion": 0,
+        "imagen": "imagenes/motor para contador de billete.png"
     }
 ]
