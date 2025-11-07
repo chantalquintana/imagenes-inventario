@@ -946,5 +946,17 @@
         "ganancia": 360000,
         "inversion": 0,
         "imagen": "imagenes/motor para contador de billete.png"
+    },
+    {
+        "codigo": "0R6098",
+        "nombre": "Rodillo de alimentación y separación Epson",
+        "descripcion": "L1110 L1118 L1119 L1250 L3100 L3106 L3108 L3110 L3115 L3116 L3117 L3118 L3119 L3150 L3151 L3153 L3156 L3158 L3160 L3161 L3163 L3210 L3250 L4150 L4158 L4160 L4168 L4170 L4260 L5190 L6178",
+        "precio_compra": 0,
+        "precio_venta": 150000,
+        "stock": 5,
+        "vendidos": 4,
+        "ganancia": 600000,
+        "inversion": 0,
+        "imagen": "imagenes/rodillo de alimentacion y separacion epson l3110.png"
     }
 ]
