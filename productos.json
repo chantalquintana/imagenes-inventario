@@ -970,5 +970,17 @@
         "ganancia": 600000,
         "inversion": 0,
         "imagen": "imagenes/rodillo de separacion epson l3110.png"
+    },
+    {
+        "codigo": "CUFR7F",
+        "nombre": "Rodillo de recogida de papel RM1-1497-000 para HP",
+        "descripcion": "P1500 P1505 P1560 P1566 P1600 P1606 M1120 M1522 M1530 M1536 MF211 MF212 MF215 MF216 MF217 MF221 MF222 MF223 MF224 MF226 MF227 MF229 MF236 MF237 MF244 MF247 MF249",
+        "precio_compra": 6500,
+        "precio_venta": 50000,
+        "stock": 9,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 58500,
+        "imagen": "imagenes/rodillo de recogida de papel  RM1-1497-000 P1505.png"
     }
 ]
