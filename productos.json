@@ -874,5 +874,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/guantes con luz led.png"
+    },
+    {
+        "codigo": "H1R39U",
+        "nombre": "Goma separador de bandeja Samsung",
+        "descripcion": "",
+        "precio_compra": 0,
+        "precio_venta": 10000,
+        "stock": 72,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/goma separdor de bandeja samsung.png"
     }
 ]
