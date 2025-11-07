@@ -898,5 +898,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/kit de reparo placa Epson.png"
+    },
+    {
+        "codigo": "9MXYL2",
+        "nombre": "Luz led romantica",
+        "descripcion": "",
+        "precio_compra": 30000,
+        "precio_venta": 130000,
+        "stock": 4,
+        "vendidos": 4,
+        "ganancia": 400000,
+        "inversion": 120000,
+        "imagen": "imagenes/luz led romantica.png"
     }
 ]
