@@ -910,5 +910,17 @@
         "ganancia": 400000,
         "inversion": 120000,
         "imagen": "imagenes/luz led romantica.png"
+    },
+    {
+        "codigo": "8RLBN2",
+        "nombre": "Led con base 3 volt",
+        "descripcion": "",
+        "precio_compra": 2500,
+        "precio_venta": 7000,
+        "stock": 197,
+        "vendidos": 53,
+        "ganancia": 238500,
+        "inversion": 492500,
+        "imagen": ""
     }
 ]
