@@ -838,5 +838,17 @@
         "ganancia": 275000,
         "inversion": 80000,
         "imagen": "imagenes/grasa para fusor 20gr.png"
+    },
+    {
+        "codigo": "AOYH13",
+        "nombre": "Grasa para fusor",
+        "descripcion": "15gr",
+        "precio_compra": 0,
+        "precio_venta": 75000,
+        "stock": 0,
+        "vendidos": 5,
+        "ganancia": 375000,
+        "inversion": 0,
+        "imagen": "imagenes/grasa para fusor 15gr.png"
     }
 ]
