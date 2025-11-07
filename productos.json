@@ -922,5 +922,17 @@
         "ganancia": 238500,
         "inversion": 492500,
         "imagen": "imagenes/8RLBN2.png"
+    },
+    {
+        "codigo": "94EXRO",
+        "nombre": "Led con base 6 volt",
+        "descripcion": "",
+        "precio_compra": 2500,
+        "precio_venta": 7000,
+        "stock": 84,
+        "vendidos": 16,
+        "ganancia": 72000,
+        "inversion": 210000,
+        "imagen": "imagenes/led con base 6volt.png"
     }
 ]
