@@ -826,5 +826,17 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/T2DX9Z.png"
+    },
+    {
+        "codigo": "FTQ2MN",
+        "nombre": "Grasa para fusor",
+        "descripcion": "20gr",
+        "precio_compra": 20000,
+        "precio_venta": 75000,
+        "stock": 4,
+        "vendidos": 5,
+        "ganancia": 275000,
+        "inversion": 80000,
+        "imagen": "imagenes/grasa para fusor 20gr.png"
     }
 ]
