@@ -862,5 +862,17 @@
         "ganancia": 1350000,
         "inversion": 0,
         "imagen": "imagenes/grasa para fusor hp original.png"
+    },
+    {
+        "codigo": "QHYH50",
+        "nombre": "Guantes conluz led",
+        "descripcion": "",
+        "precio_compra": 0,
+        "precio_venta": 100000,
+        "stock": 9,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 0,
+        "imagen": "imagenes/guantes con luz led.png"
     }
 ]
