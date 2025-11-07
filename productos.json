@@ -850,5 +850,17 @@
         "ganancia": 375000,
         "inversion": 0,
         "imagen": "imagenes/grasa para fusor 15gr.png"
+    },
+    {
+        "codigo": "M2IJF1",
+        "nombre": "Grasa para fusor HP Original",
+        "descripcion": "",
+        "precio_compra": 0,
+        "precio_venta": 150000,
+        "stock": 1,
+        "vendidos": 9,
+        "ganancia": 1350000,
+        "inversion": 0,
+        "imagen": "imagenes/grasa para fusor hp original.png"
     }
 ]
