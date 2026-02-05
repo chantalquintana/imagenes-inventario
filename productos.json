@@ -77,10 +77,10 @@
         "descripcion": "SC 23MB F100 F130 F160 F170",
         "precio_compra": 35000,
         "precio_venta": 200000,
-        "stock": 11,
-        "vendidos": 16,
-        "ganancia": 2640000,
-        "inversion": 385000,
+        "stock": 8,
+        "vendidos": 19,
+        "ganancia": 3135000,
+        "inversion": 280000,
         "imagen": "imagenes/0FAP5B.png"
     },
     {
