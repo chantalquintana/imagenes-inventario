@@ -5,9 +5,9 @@
         "descripcion": "ET2700 ET4700 M1120 M1140 M1180 M2140 M3140 M3180 WF2800",
         "precio_compra": 0,
         "precio_venta": 100000,
-        "stock": 4,
-        "vendidos": 2,
-        "ganancia": 200000,
+        "stock": 3,
+        "vendidos": 3,
+        "ganancia": 300000,
         "inversion": 0,
         "imagen": "imagenes/R91RP5.png"
     },
