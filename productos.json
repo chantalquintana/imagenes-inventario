@@ -120,6 +120,18 @@
         "imagen": "imagenes/10ENFV.png"
     },
     {
+        "codigo": "L8SEY6",
+        "nombre": "Almohadilla+Chip Epson T6712",
+        "descripcion": "WF 6090 6091 6093 6590 6593 8010 8090 8093 8510 8590 8591 8593",
+        "precio_compra": 35000,
+        "precio_venta": 200000,
+        "stock": 10,
+        "vendidos": 0,
+        "ganancia": 0,
+        "inversion": 350000,
+        "imagen": ""
+    },
+    {
         "codigo": "LFBCJ8",
         "nombre": "Buje de rodillo superior para Kyocera",
         "descripcion": "FS 1300 1110 1100 1024 1124 1128 1028 M2810 KM2820 ECOSYS M2030DN M2530 M2035 M2535 P2035 P2135",
@@ -1006,17 +1018,5 @@
         "ganancia": 0,
         "inversion": 0,
         "imagen": "imagenes/GJ4F48.png"
-    },
-    {
-        "codigo": "L8SEY6",
-        "nombre": "Almohadilla+Chip Epson T6712",
-        "descripcion": "WF 6090 6091 6093 6590 6593 8010 8090 8093 8510 8590 8591 8593",
-        "precio_compra": 35000,
-        "precio_venta": 200000,
-        "stock": 10,
-        "vendidos": 0,
-        "ganancia": 0,
-        "inversion": 350000,
-        "imagen": ""
     }
 ]
