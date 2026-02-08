@@ -195,7 +195,12 @@ function mostrarProductos(lista) {
         <div class="nombre">${p.nombre}</div>
         <div class="descripcion recortada" id="desc-${i}">${p.descripcion}</div> 
         <div class="precio">Gs. ${p.precio_venta}</div>
-        <div class="stock">Stock: ${p.stock}</div>
+        <div class="stock">
+           Stock: <span id="stock-${i}">${p.stock}</span>
+           <button class="stock-btn" onclick="actualizarStock(${i}, -1)">-</button>
+           <button class="stock-btn" onclick="actualizarStock(${i}, 1)">+</button>
+        </div>
+
       </div>
     `;
     catalogo.appendChild(div);
@@ -237,6 +242,17 @@ function toggleDescripcion(index) {
   }
 }
 
+function actualizarStock(index, cantidad) {
+  // Actualizar stock en el array productos
+  productos[index].stock += cantidad;
+
+  // Actualizar el valor en la página
+  const stockElement = document.getElementById(`stock-${index}`);
+  stockElement.textContent = productos[index].stock;
+
+
+  console.log(`Stock del producto ${productos[index].nombre} actualizado: ${productos[index].stock}`);
+}
 
 window.addEventListener('DOMContentLoaded', cargarProductos);
 </script>
