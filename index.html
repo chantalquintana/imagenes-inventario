@@ -84,7 +84,7 @@
     max-height: 1000px;
   } 
   .descripcion.recortada {
-    max-height: 165px;  /* la que estará recortada inicialmente */
+    max-height: 165px;
     overflow: hidden;
     position: relative;
   }
@@ -103,6 +103,24 @@
     font-size: 1rem;
     color: #555;
     margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .stock button {
+    background-color: #004080;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    padding: 3px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .stock span {
+    min-width: 30px;
+    display: inline-block;
+    text-align: center;
   }
   footer {
     background-color: #004080;
@@ -189,27 +207,31 @@ function mostrarProductos(lista) {
     const div = document.createElement("div");
     div.className = "producto";
     div.setAttribute('role', 'listitem');
+
     div.innerHTML = `
       <img src="${p.imagen}" alt="${p.nombre}" loading="lazy" />
       <div class="info">
         <div class="nombre">${p.nombre}</div>
         <div class="descripcion recortada" id="desc-${i}">${p.descripcion}</div> 
         <div class="precio">Gs. ${p.precio_venta}</div>
-        <div class="stock">Stock: ${p.stock}</div>
+        <div class="stock" id="stock-${i}">
+          Stock: <span>${p.stock}</span>
+          <button onclick="modificarStock('${p.Código}', ${i}, 1)">+</button>
+          <button onclick="modificarStock('${p.Código}', ${i}, -1)">-</button>
+        </div>
+
       </div>
     `;
     catalogo.appendChild(div);
 
-    // Ahora, chequear si la descripción es larga para mostrar "Ver más"
     const desc = document.getElementById(`desc-${i}`);
-    if (desc.scrollHeight > 60) { // si el contenido supera la altura recortada
+    if (desc.scrollHeight > 60) {
         const boton = document.createElement('button');
         boton.className = 'ver-mas';
         boton.textContent = 'Ver más';
         boton.addEventListener('click', () => toggleDescripcion(i));
         desc.parentNode.insertBefore(boton, desc.nextSibling);
-    }   
-
+    }
   });
 }
 
@@ -237,8 +259,23 @@ function toggleDescripcion(index) {
   }
 }
 
+// --- NUEVO: modificar stock desde la web ---
+function modificarStock(index, cambio) {
+  let stockSpan = document.getElementById(`stock-${index}`);
+  let nuevoStock = parseInt(stockSpan.textContent) + cambio;
+  if (nuevoStock < 0) nuevoStock = 0;
+  stockSpan.textContent = nuevoStock;
 
-window.addEventListener('DOMContentLoaded', cargarProductos);
+  // --- enviar cambio a tu servidor o inventario.py ---
+  fetch(`/actualizar_stock`, {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({codigo: productos[index].Código, nuevoStock: nuevoStock})
+  }).then(res => res.json())
+    .then(data => console.log('Stock actualizado', data))
+    .catch(err => console.error('Error actualizando stock', err));
+}
+
 </script>
 </body>
 </html>
