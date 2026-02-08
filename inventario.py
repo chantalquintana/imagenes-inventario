@@ -12,9 +12,6 @@ import gspread
 import subprocess
 import json
 from openpyxl import load_workbook
-from flask import Flask, request, jsonify
-app = Flask(__name__)
-
 
 def git_push_changes(mensaje_commit="Actualización inventario"):
     try:
@@ -722,12 +719,11 @@ if __name__ == "__main__":
 
 
 import threading
+from flask import Flask, request, jsonify
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 def iniciar_flask():
-    from flask import Flask, request, jsonify
-    import gspread
-    from oauth2client.service_account import ServiceAccountCredentials
-
     # --- Configuración Google Sheets ---
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("credenciales.json", scope)
@@ -743,16 +739,15 @@ def iniciar_flask():
         codigo = data.get("codigo")
         nuevo_stock = data.get("nuevoStock")
 
-        # Buscar la fila correspondiente al código
-        all_codes = sheet.col_values(1)  # Columna A: Código
+        all_codes = sheet.col_values(1)  # Columna A = Código
         if codigo in all_codes:
-            fila = all_codes.index(codigo) + 1  # +1 porque gspread empieza en 1
-            sheet.update_cell(fila, 6, str(nuevo_stock))  # Columna 6 = Stock
+            fila = all_codes.index(codigo) + 1
+            sheet.update_cell(fila, 6, str(nuevo_stock))  # Columna F = Stock
             return jsonify({"status": "ok", "fila": fila, "nuevoStock": nuevo_stock})
         else:
             return jsonify({"status": "error", "message": "Código no encontrado"}), 404
 
     app.run(port=5000)
 
-# --- Iniciar Flask en un hilo aparte ---
+# --- Iniciar Flask en un hilo separado ---
 threading.Thread(target=iniciar_flask, daemon=True).start()
