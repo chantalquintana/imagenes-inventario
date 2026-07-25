@@ -763,7 +763,23 @@ def iniciar_flask():
 
     @app.route("/productos.json")
     def productos():
-        return open("productos.json", encoding="utf-8").read()
+       datos = sheet.get_all_records()
+
+       lista = []
+
+       for p in datos:
+          producto = {
+             "codigo": str(p["Código"]),
+             "nombre": p["Nombre"],
+             "descripcion": p["Descripción"],
+             "precio_venta": p["Precio Venta"],
+             "stock": int(p["Stock"]),
+             "imagen": p["Imagen"]
+          }
+
+          lista.append(producto)
+
+       return jsonify(lista)
 
     @app.route("/imagenes/<nombre>")
     def imagenes(nombre):
