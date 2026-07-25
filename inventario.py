@@ -722,7 +722,7 @@ def iniciar_flask():
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("inventarioinfopar-d0cf52f91f49.json", scope)
     client = gspread.authorize(creds)
-    sheet = client.open("inventario_infopar").sheet1
+    sheet = client.open_by_key("1Cgo4C--ByZikIPyXvZJtnBsCjOM4W9fju_N3O9T-3V0").worksheet("Inventario_Infopar")
 
     # --- Crear servidor Flask ---
     app = Flask(__name__)
