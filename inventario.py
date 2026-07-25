@@ -736,6 +736,8 @@ def iniciar_flask():
         nuevo_stock = data.get("nuevoStock")
 
         all_codes = sheet.col_values(1)  # Columna A = Código
+        print("Código recibido:", codigo)  #codigo tempral 
+        print("Primeros códigos en Sheets:", all_codes[:5]) #codigo temporal
         if codigo in all_codes:
             fila = all_codes.index(codigo) + 1
             sheet.update_cell(fila, 6, str(nuevo_stock))  # Columna F = Stock
