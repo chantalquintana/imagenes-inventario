@@ -14,6 +14,7 @@ import json
 from openpyxl import load_workbook
 import threading
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
@@ -726,6 +727,7 @@ def iniciar_flask():
 
     # --- Crear servidor Flask ---
     app = Flask(__name__)
+    CORS(app)
 
     @app.route("/actualizar_stock", methods=["POST"])
     def actualizar_stock():

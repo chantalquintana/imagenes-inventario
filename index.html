@@ -260,8 +260,8 @@ function toggleDescripcion(index) {
 }
 
 // --- NUEVO: modificar stock desde la web ---
-function modificarStock(index, cambio) {
-  let stockSpan = document.getElementById(`stock-${index}`);
+function modificarStock(codigo, index, cambio) {
+  let stockSpan = document.querySelector(`#stock-${index} span`);
   let nuevoStock = parseInt(stockSpan.textContent) + cambio;
   if (nuevoStock < 0) nuevoStock = 0;
   stockSpan.textContent = nuevoStock;
@@ -270,11 +270,12 @@ function modificarStock(index, cambio) {
   fetch(`http://127.0.0.1:5000/actualizar_stock`, {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({codigo: productos[index].Código, nuevoStock: nuevoStock})
+    body: JSON.stringify({codigo: codigo, nuevoStock: nuevoStock})
   }).then(res => res.json())
     .then(data => console.log('Stock actualizado', data))
     .catch(err => console.error('Error actualizando stock', err));
 }
+
 
 </script>
 </body>
