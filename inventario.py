@@ -747,6 +747,7 @@ def iniciar_flask():
         else:
             return jsonify({"status": "error", "message": "Código no encontrado"}), 404
 
+    print("FLASK INICIANDO")
     app.run(port=5000)
 
 # --- Iniciar Flask en un hilo separado ---
