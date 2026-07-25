@@ -12,7 +12,14 @@ except ImportError:
     
 import os
 import pandas as pd
-from PIL import Image, ImageTk, ImageDraw
+
+from PIL import Image, ImageDraw
+
+try:
+    from PIL import ImageTk
+except ImportError:
+    ImageTk = None
+
 import random
 import string
 import shutil
