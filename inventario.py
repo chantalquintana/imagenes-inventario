@@ -12,6 +12,10 @@ import gspread
 import subprocess
 import json
 from openpyxl import load_workbook
+import threading
+from flask import Flask, request, jsonify
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 def git_push_changes(mensaje_commit="Actualización inventario"):
     try:
@@ -711,23 +715,12 @@ class InventarioApp:
             return
         self.llenar_tabla(df_filtrado)
 
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = InventarioApp(root)
-    root.mainloop()
-
-
-
-import threading
-from flask import Flask, request, jsonify
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 
 def iniciar_flask():
     print("ENTRO A INICIAR FLASK")
     # --- Configuración Google Sheets ---
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("credenciales.json", scope)
+    creds = ServiceAccountCredentials.from_json_keyfile_name("inventarioinfopar-d0cf52f91f49.json", scope)
     client = gspread.authorize(creds)
     sheet = client.open("inventario_infopar").sheet1
 
@@ -751,5 +744,14 @@ def iniciar_flask():
     print("FLASK INICIANDO")
     app.run(port=5000)
 
-# --- Iniciar Flask en un hilo separado ---
-threading.Thread(target=iniciar_flask, daemon=True).start()
+
+if __name__ == "__main__":
+
+    threading.Thread(target=iniciar_flask, daemon=True).start()    
+
+    root = tk.Tk()
+    app = InventarioApp(root)
+    root.mainloop()
+
+
+
