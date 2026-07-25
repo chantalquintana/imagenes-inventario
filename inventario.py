@@ -724,6 +724,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 def iniciar_flask():
+    print("ENTRO A INICIAR FLASK")
     # --- Configuración Google Sheets ---
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("credenciales.json", scope)
