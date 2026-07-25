@@ -1,5 +1,15 @@
-import tkinter as tk
-from tkinter import ttk, messagebox, filedialog
+try:
+    import tkinter as tk
+except ImportError:
+    tk = None
+    
+try:
+    from tkinter import ttk, messagebox, filedialog
+except ImportError:
+    ttk = None
+    messagebox = None
+    filedialog = None
+    
 import os
 import pandas as pd
 from PIL import Image, ImageTk, ImageDraw
@@ -15,7 +25,6 @@ from openpyxl import load_workbook
 import threading
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 def git_push_changes(mensaje_commit="Actualización inventario"):
