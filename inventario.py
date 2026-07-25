@@ -735,9 +735,20 @@ class InventarioApp:
 
 def iniciar_flask():
     print("ENTRO A INICIAR FLASK")
+    
     # --- Configuración Google Sheets ---
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-    creds = ServiceAccountCredentials.from_json_keyfile_name("inventarioinfopar-d0cf52f91f49.json", scope)
+
+    import os
+    import json
+    from oauth2client.service_account import ServiceAccountCredentials
+
+    credenciales_json = json.loads(os.environ["GOOGLE_CREDENTIALS"])
+
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(
+      credenciales_json, scope
+    )
+    
     client = gspread.authorize(creds)
     sheet = client.open_by_key("1Cgo4C--ByZikIPyXvZJtnBsCjOM4W9fju_N3O9T-3V0").worksheet("Inventario_Infopar")
 
