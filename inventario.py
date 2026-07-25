@@ -727,12 +727,22 @@ def iniciar_flask():
 
     # --- Crear servidor Flask ---
     app = Flask(__name__)
+    
+    CORS(app)
 
     @app.route("/")
     def inicio():
         return open("index.html", encoding="utf-8").read()
 
-    CORS(app)
+    @app.route("/productos.json")
+    def productos():
+        return open("productos.json", encoding="utf-8").read()
+
+    @app.route("/logo_infopar.png")
+    def logo():
+       return open("logo_infopar.png", "rb").read()
+
+    
 
     @app.route("/actualizar_stock", methods=["POST"])
     def actualizar_stock():
@@ -750,8 +760,8 @@ def iniciar_flask():
         else:
             return jsonify({"status": "error", "message": "Código no encontrado"}), 404
 
-    print("FLASK INICIANDO")
-    app.run(host="0.0.0.0", port=5000)
+     print("FLASK INICIANDO")
+     app.run(host="0.0.0.0", port=5000)
 
 
 if __name__ == "__main__":
