@@ -738,12 +738,15 @@ def iniciar_flask():
     def productos():
         return open("productos.json", encoding="utf-8").read()
 
+    @app.route("/imagenes/<nombre>")
+    def imagenes(nombre):
+        return open(os.path.join("imagenes", nombre), "rb").read()
+
     @app.route("/logo_infopar.png")
     def logo():
-       return open("logo_infopar.png", "rb").read()
+        return open("logo_infopar.png", "rb").read()
 
     
-
     @app.route("/actualizar_stock", methods=["POST"])
     def actualizar_stock():
         data = request.get_json()
@@ -760,8 +763,8 @@ def iniciar_flask():
         else:
             return jsonify({"status": "error", "message": "Código no encontrado"}), 404
 
-     print("FLASK INICIANDO")
-     app.run(host="0.0.0.0", port=5000)
+    print("FLASK INICIANDO")
+    app.run(host="0.0.0.0", port=5000)
 
 
 if __name__ == "__main__":
