@@ -216,8 +216,8 @@ function mostrarProductos(lista) {
         <div class="precio">Gs. ${p.precio_venta}</div>
         <div class="stock" id="stock-${i}">
           Stock: <span>${p.stock}</span>
-          <button onclick="modificarStock('${p.Código}', ${i}, 1)">+</button>
-          <button onclick="modificarStock('${p.Código}', ${i}, -1)">-</button>
+          <button onclick="modificarStock('${p.codigo}', ${i}, 1)">+</button>
+          <button onclick="modificarStock('${p.codigo}', ${i}, -1)">-</button>
         </div>
 
       </div>
