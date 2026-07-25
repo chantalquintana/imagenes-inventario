@@ -1,0 +1,8 @@
+flask
+flask-cors
+pandas
+openpyxl
+pillow
+gspread
+oauth2client
+google-api-python-client
