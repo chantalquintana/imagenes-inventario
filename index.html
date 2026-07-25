@@ -267,7 +267,7 @@ function modificarStock(codigo, index, cambio) {
   stockSpan.textContent = nuevoStock;
 
   // --- enviar cambio a tu servidor o inventario.py ---
-  fetch(`http://127.0.0.1:5000/actualizar_stock`, {
+  fetch('/actualizar_stock', {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
     body: JSON.stringify({codigo: codigo, nuevoStock: nuevoStock})
