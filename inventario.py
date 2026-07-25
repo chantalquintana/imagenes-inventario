@@ -769,11 +769,18 @@ def iniciar_flask():
 
 if __name__ == "__main__":
 
-    threading.Thread(target=iniciar_flask, daemon=True).start()    
+    import os
 
-    root = tk.Tk()
-    app = InventarioApp(root)
-    root.mainloop()
+    if os.environ.get("RENDER"):
 
+        iniciar_flask()
+
+    else:
+
+        threading.Thread(target=iniciar_flask, daemon=True).start()
+
+        root = tk.Tk()
+        app = InventarioApp(root)
+        root.mainloop()
 
 
