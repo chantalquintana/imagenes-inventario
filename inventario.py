@@ -311,6 +311,14 @@ class InventarioApp:
         btn_mostrar = tk.Button(search_frame, text="Mostrar Todo", command=lambda: self.llenar_tabla(pd.DataFrame(self.inventario_sheets.leer_datos())))
         btn_mostrar.pack(side="left", padx=5)
 
+        btn_actualizar = tk.Button(
+           search_frame,
+           text="🔄 Actualizar",
+           command=self.preguntar_actualizar_desde_sheets
+        )
+
+        btn_actualizar.pack(side="left", padx=5)
+
         table_frame = tk.Frame(bottom_frame)
         table_frame.pack(fill="both", expand=True)
 
