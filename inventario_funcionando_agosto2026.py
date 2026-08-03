@@ -763,7 +763,23 @@ def iniciar_flask():
 
     @app.route("/productos.json")
     def productos():
-        return open("productos.json", encoding="utf-8").read()
+       datos = sheet.get_all_records()
+
+       lista = []
+
+       for p in datos:
+          producto = {
+             "codigo": str(p["Código"]),
+             "nombre": p["Nombre"],
+             "descripcion": p["Descripción"],
+             "precio_venta": p["Precio Venta"],
+             "stock": int(p["Stock"]),
+             "imagen": "imagenes/" + p["Imagen"]
+          }
+
+          lista.append(producto)
+
+       return jsonify(lista)
 
     @app.route("/imagenes/<nombre>")
     def imagenes(nombre):
@@ -791,6 +807,7 @@ def iniciar_flask():
             return jsonify({"status": "error", "message": "Código no encontrado"}), 404
 
     print("FLASK INICIANDO")
+
     app.run(host="0.0.0.0", port=5000)
 
 
