@@ -431,7 +431,7 @@ class InventarioApp:
     def actualizar_periodicamente(self):
         self.preguntar_actualizar_desde_sheets(False)
         # Actualiza cada 5 minutos (300000 ms)
-        self.root.after(10000, self.actualizar_periodicamente)
+        self.root.after(300000, self.actualizar_periodicamente)
 
     def bloquear_redimension_columnas(self, event):
         # Prevenir que el usuario cambie ancho columnas
