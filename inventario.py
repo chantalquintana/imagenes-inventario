@@ -774,7 +774,7 @@ def iniciar_flask():
              "descripcion": p["Descripción"],
              "precio_venta": p["Precio Venta"],
              "stock": int(p["Stock"]),
-             "imagen": p["Imagen"]
+             "imagen": "imagenes/" + p["Imagen"]
           }
 
           lista.append(producto)
@@ -807,6 +807,13 @@ def iniciar_flask():
             return jsonify({"status": "error", "message": "Código no encontrado"}), 404
 
     print("FLASK INICIANDO")
+
+    import os
+
+    print("DIRECTORIO ACTUAL:", os.getcwd())
+    print("CARPETA IMAGENES EXISTE:", os.path.exists("imagenes"))
+    print("ARCHIVO INO44L EXISTE:", os.path.exists("imagenes/INO44L.jpg"))
+
     app.run(host="0.0.0.0", port=5000)
 
 
