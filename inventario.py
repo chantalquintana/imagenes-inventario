@@ -808,12 +808,6 @@ def iniciar_flask():
 
     print("FLASK INICIANDO")
 
-    import os
-
-    print("DIRECTORIO ACTUAL:", os.getcwd())
-    print("CARPETA IMAGENES EXISTE:", os.path.exists("imagenes"))
-    print("ARCHIVO INO44L EXISTE:", os.path.exists("imagenes/INO44L.jpg"))
-
     app.run(host="0.0.0.0", port=5000)
 
 
