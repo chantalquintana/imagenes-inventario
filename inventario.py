@@ -392,7 +392,7 @@ class InventarioApp:
 
         self.imagen_actual = None
 
-    def preguntar_actualizar_desde_sheets(self):
+    def preguntar_actualizar_desde_sheets(self, mostrar_mensaje=True):
         try:
             # Leer datos locales si existen
             if os.path.exists(FILE_PATH):
@@ -415,7 +415,8 @@ class InventarioApp:
                 self.df = df_sheets
                 guardar_df(self.df)
                 self.llenar_tabla(self.df)
-                messagebox.showinfo("Actualizado", "Inventario local actualizado desde Google Sheets.")
+                if mostrar_mensaje:
+                    messagebox.showinfo("Actualizado", "Inventario local actualizado desde Google Sheets.")
             else:
                 if not df_local.empty:
                     self.df = df_local
@@ -428,7 +429,7 @@ class InventarioApp:
                 self.llenar_tabla(self.df)
 
     def actualizar_periodicamente(self):
-        self.preguntar_actualizar_desde_sheets()
+        self.preguntar_actualizar_desde_sheets(False)
         # Actualiza cada 5 minutos (300000 ms)
         self.root.after(300000, self.actualizar_periodicamente)
 
