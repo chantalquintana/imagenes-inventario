@@ -216,6 +216,7 @@ class InventarioApp:
     def __init__(self, root):
         self.root = root
         self.root.title("INFOPAR PARAGUAY")
+        self.root.bind("<Control-F5>", lambda event: self.preguntar_actualizar_desde_sheets())
         ancho_ventana = 900
         alto_ventana = 580
         ancho_pantalla = self.root.winfo_screenwidth()
